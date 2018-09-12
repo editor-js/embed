@@ -171,11 +171,11 @@ var editor = CodexEditor({
   "type" : "embed",
   "data" : {
     "key" : "coub",
-    "source" : "https://coub.com/view/1awfiw",
-    "embed" : "https://coub.com/embed/1awfiw",
+    "source" : "https://coub.com/view/1czcdf",
+    "embed" : "https://coub.com/embed/1czcdf",
     "width" : 580,
     "height" : 320,
-    "caption" : "Raining Men"
+    "caption" : "My Life"
   }
 }
 ```
