@@ -66,7 +66,7 @@ class Embed {
       throw Error('Embed Tool data should be object');
     }
 
-    const {key, source, embed, width, height, caption} = data;
+    const {key, source, embed, width, height, caption = ''} = data;
 
     this._data = {
       key: this.data.key || key,
