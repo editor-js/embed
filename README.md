@@ -44,23 +44,42 @@ Add a new Tool to the `tools` property of the CodeX Editor initial config.
 ```javascript
 var editor = CodexEditor({
   ...
-  
+
   tools: {
     ...
     embed: Embed,
   },
-  
+
   ...
 });
 ```
 
 ## Available configuration
 
-You can add some configuration to customize Embed Tool.
+Embed Tool support some services by default (see the full list [here](docs/services.md)). You can specify services you would like to use:
 
-#### Services
+```javascript
+var editor = CodexEditor({
+  ...
 
-Embed Tool support some services by default (see the full list [here](docs/services.md)). But you can provide your own services using simple configuration.
+  tools: {
+    ...
+    embed: {
+      class: Embed,
+      config: {
+        services: {
+          youtube: true,
+          coub: true
+        }
+      }
+    },
+  },
+
+  ...
+});
+```
+
+Also you can provide your own services using simple configuration.
 
 First of all you should create a Service configuration object. It contains following fields:
 
@@ -69,8 +88,8 @@ First of all you should create a Service configuration object. It contains follo
 | `regex`    | `RegExp`   | Pattern of pasted URLs. You should use regexp groups to extract resource id
 | `embedUrl` | `string`   | Url of resource\`s embed page. Use `<%= remote_id %>` to substitute resource identifier
 | `html`     | `string`   | HTML code of iframe with embedded content. `embedUrl` will be set as iframe `src`
-| `height`   | `number`   | _Optional_. Height of inserted iframe 
-| `width`    | `number`   | _Optional_. Width of inserted iframe 
+| `height`   | `number`   | _Optional_. Height of inserted iframe
+| `width`    | `number`   | _Optional_. Width of inserted iframe
 | `id`       | `Function` | _Optional_. If your id is complex you can provide function to make the id from extraced regexp groups
 
 Example:
@@ -91,13 +110,15 @@ When you create a Service configuration object, you can provide it with Tool\`s 
 ```javascript
 var editor = CodexEditor({
   ...
-  
+
   tools: {
     ...
     embed: {
       class: Embed,
       config: {
         services: {
+          youtube: true,
+          coub: true,
           codepen: {
             regex: /https?:\/\/codepen.io\/([^\/\?\&]*)\/pen\/([^\/\?\&]*)/,
             embedUrl: 'https://codepen.io/<%= remote_id %>?height=300&theme-id=0&default-tab=css,result&embed-version=2',
@@ -110,31 +131,7 @@ var editor = CodexEditor({
       }
     },
   },
-  
-  ...
-});
-```
 
-#### Black and white lists
-
-If you want to use just few services or if you want to exclude some of them you can use black and white lists. 
-Just provide them with Tool\`s configuration as array of services keys:
-
-```javascript
-var editor = CodexEditor({
-  ...
-  
-  tools: {
-    ...
-    embed: {
-      class: Embed,
-      config: {
-        whitelist: ['youtube', 'coub', 'twitch', 'vimeo'],
-        blacklist: ['coub']
-      }
-    },
-  },
-  
   ...
 });
 ```
@@ -145,7 +142,7 @@ CodeX Editor provides useful inline toolbar. You can allow it\`s usage in the Em
 ```javascript
 var editor = CodexEditor({
   ...
-  
+
   tools: {
     ...
     embed: {
@@ -153,16 +150,16 @@ var editor = CodexEditor({
       inlineToolbar: true
     },
   },
-  
+
   ...
 });
 ```
 
 ## Output data
 
-| Field   | Type     | Description                                   
-| ------- | -------- | ----------- 
-| key     | `string` | service key                                 
+| Field   | Type     | Description
+| ------- | -------- | -----------
+| service | `string` | service unique name
 | source  | `string` | source URL
 | embed   | `string` | URL for source embed page
 | width   | `number` | embedded content width
@@ -174,7 +171,7 @@ var editor = CodexEditor({
 {
   "type" : "embed",
   "data" : {
-    "key" : "coub",
+    "service" : "coub",
     "source" : "https://coub.com/view/1czcdf",
     "embed" : "https://coub.com/embed/1czcdf",
     "width" : 580,

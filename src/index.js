@@ -3,7 +3,7 @@ const SERVICES = require('./services');
 /**
  * @typedef {Object} EmbedData
  * @description Embed Tool data
- * @property {string} key - service key
+ * @property {string} service - service name
  * @property {string} url - source URL of embedded content
  * @property {string} embed - URL to source embed page
  * @property {number} [width] - embedded content width
@@ -66,10 +66,10 @@ class Embed {
       throw Error('Embed Tool data should be object');
     }
 
-    const {key, source, embed, width, height, caption = ''} = data;
+    const {service, source, embed, width, height, caption = ''} = data;
 
     this._data = {
-      key: this.data.key || key,
+      service: this.data.service || service,
       source: this.data.source || source,
       embed: this.data.embed || embed,
       width: this.data.width || width,
@@ -91,7 +91,7 @@ class Embed {
    * @return {HTMLElement}
    */
   render() {
-    const {html} = Embed.services[this.data.key];
+    const {html} = Embed.services[this.data.service];
     const container = document.createElement('div');
     const caption = document.createElement('div');
     const template = document.createElement('template');
@@ -129,16 +129,16 @@ class Embed {
    * Handle pasted url and return Service object
    *
    * @param {string} url - pasted URL
-   * @param {string} key - service key
+   * @param {string} service - service service
    * @return {Service}
    */
-  static pasteHandler(url, key) {
-    const {regex, embedUrl, width, height, id = (ids) => ids.shift()} = Embed.services[key];
+  static pasteHandler(url, service) {
+    const {regex, embedUrl, width, height, id = (ids) => ids.shift()} = Embed.services[service];
     const result = regex.exec(url).slice(1);
     const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
 
     return {
-      key,
+      service,
       source: url,
       embed,
       width,
@@ -151,15 +151,23 @@ class Embed {
    *
    * @param {EmbedConfig} config
    */
-  static prepare({config}) {
-    let {services = {}, whitelist = [], blacklist = []} = config;
+  static prepare({config = {}}) {
+    let {services = {}} = config;
 
     let entries = Object.entries(SERVICES);
 
-    /**
-     * Add services provided by user
-     */
-    entries.concat(Object.entries(services)
+    const enabledServices = Object
+      .entries(services)
+      .filter(([key, value]) => {
+        return typeof value === 'boolean' && value === true;
+      })
+      .map(([ key ]) => key);
+
+    const userServices = Object
+      .entries(services)
+      .filter(([key, value]) => {
+        return typeof value === 'object';
+      })
       .filter(([key, service]) => Embed.checkServiceConfig(service))
       .map(([key, service]) => {
         const {regex, embedUrl, html, height, width, id} = service;
@@ -172,17 +180,13 @@ class Embed {
           width,
           id
         } ];
-      }));
+      });
 
-    /**
-     * Filter in accordance with black and white lists
-     */
-    if (whitelist instanceof Array && whitelist.length) {
-      entries = entries.filter(([ key ]) => whitelist.includes(key));
+    if (enabledServices.length) {
+      entries = entries.filter(([ key ]) => enabledServices.includes(key));
     }
-    if (blacklist instanceof Array && blacklist.length) {
-      entries = entries.filter(([ key ]) => !blacklist.includes(key));
-    }
+
+    entries.concat(userServices);
 
     Embed.services = entries.reduce((result, [key, service]) => {
       if (!(key in result)) {
