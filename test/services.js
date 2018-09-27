@@ -238,4 +238,30 @@ describe('Services Regexps', () => {
     expect(data2.source).to.be.equal(url2);
   });
 
+  it('Patterns', async () => {
+    const services = {
+      youtube: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
+      vimeo: 'https://vimeo.com/289836809',
+      coub: 'https://coub.com/view/1efrxs',
+      imgur: 'https://imgur.com/gallery/OHbkxgr',
+      gfycat: 'https://gfycat.com/EsteemedMarvelousHagfish',
+      'twitch-channel': 'https://www.twitch.tv/ninja',
+      'twitch-video': 'https://www.twitch.tv/videos/315468440',
+      'yandex-music-album': 'https://music.yandex.ru/album/5643859',
+      'yandex-music-track': 'https://music.yandex.ru/album/5643859/track/42662275',
+      'yandex-music-playlist': 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905',
+      'codepen': 'https://codepen.io/Rikkokiri/pen/RYBrwG'
+    };
+
+    Object
+      .entries(services)
+      .forEach(([name, url]) => {
+        const foundService = Object.entries(patterns).find(([key, pattern]) => {
+          return pattern.test(url);
+        });
+
+        expect(foundService[0]).to.be.equal(name);
+      });
+  });
+
 });

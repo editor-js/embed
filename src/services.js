@@ -42,7 +42,7 @@ module.exports = {
     width: 580
   },
   'twitch-channel': {
-    regex: /https?:\/\/www\.twitch\.tv\/([^\/\?\&]*)/,
+    regex: /https?:\/\/www\.twitch\.tv\/([^\/\?\&]*)\/?$/,
     embedUrl: 'https://player.twitch.tv/?channel=<%= remote_id %>',
     html: '<iframe frameborder="0" allowfullscreen="true" scrolling="no" height="366" style="width:100%;"></iframe>',
     height: 366,
@@ -56,7 +56,7 @@ module.exports = {
     width: 600
   },
   'yandex-music-album': {
-    regex: /https?:\/\/music\.yandex\.ru\/album\/([0-9]*)/,
+    regex: /https?:\/\/music\.yandex\.ru\/album\/([0-9]*)\/?$/,
     embedUrl: 'https://music\.yandex\.ru/iframe/#album/<%= remote_id %>/',
     html: '<iframe frameborder=\"0\" style=\"border:none;width:540px;height:400px;\" style=\"width:100%;\" height=\"400\"></iframe>',
     height: 400,
