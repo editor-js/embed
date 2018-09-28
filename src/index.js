@@ -35,7 +35,7 @@ const SERVICES = require('./services');
  * @property {HTMLElement} element - embedded content container
  *
  * @property {Object} services - static property with available services
- * @patterns {Object} patterns - static property with patterns for paste handling configuration
+ * @property {Object} patterns - static property with patterns for paste handling configuration
  */
 class Embed {
   /**
