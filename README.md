@@ -79,7 +79,10 @@ var editor = CodexEditor({
 });
 ```
 
+> Note that if you pass services you want to use like in the example above, others will not be enabled.
+
 Also you can provide your own services using simple configuration.
+
 
 First of all you should create a Service configuration object. It contains following fields:
 
