@@ -22,8 +22,6 @@ const SERVICES = require('./services');
  * @typedef {Object} EmbedConfig
  * @description Embed tool configuration object
  * @property {Object} [services] - additional services provided by user. Each property should contain Service object
- * @property {string[]} [whitelist] - array of services to use
- * @property {string[]} [blacklist] - array of services to exclude
  */
 
 /**
