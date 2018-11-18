@@ -6,236 +6,214 @@ EmbedTool.prepare({});
 const {patternHandler, patterns} = EmbedTool.onPaste;
 
 describe('Services Regexps', () => {
-
   it('YouTube', async () => {
     const service = 'youtube';
 
-    const url1 = 'https://www.youtube.com/watch?v=wZZ7oFKsKzY';
-    const url2 = 'https://www.youtube.com/watch?v=ZWO6TQHw7is';
+    const urls = [
+      {source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120'},
+      {source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN'},
+      {source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://www.youtube.com/embed/wZZ7oFKsKzY');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://www.youtube.com/embed/ZWO6TQHw7is');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Vimeo', async () => {
     const service = 'vimeo';
 
-    const url1 = 'https://vimeo.com/289836809';
-    const url2 = 'https://vimeo.com/280712228';
+    const urls = [
+      {source: 'https://vimeo.com/289836809', embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0'},
+      {source: 'https://vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://player.vimeo.com/video/289836809?title=0&byline=0');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.vimeo.com/video/280712228?title=0&byline=0');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Coub', async () => {
     const service = 'coub';
 
-    const url1 = 'https://coub.com/view/1efrxs';
-    const url2 = 'https://coub.com/view/1c6nrr';
+    const urls = [
+      {source: 'https://coub.com/view/1efrxs', embed: 'https://coub.com/embed/1efrxs'},
+      {source: 'https://coub.com/view/1c6nrr', embed: 'https://coub.com/embed/1c6nrr'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://coub.com/embed/1efrxs');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://coub.com/embed/1c6nrr');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Imgur', async () => {
     const service = 'imgur';
 
-    const url1 = 'https://imgur.com/gallery/OHbkxgr';
-    const url2 = 'https://imgur.com/gallery/TqIWG12';
+    const urls = [
+      {source: 'https://imgur.com/gallery/OHbkxgr', embed: 'http://imgur.com/OHbkxgr/embed'},
+      {source: 'https://imgur.com/gallery/TqIWG12', embed: 'http://imgur.com/TqIWG12/embed'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('http://imgur.com/OHbkxgr/embed');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('http://imgur.com/TqIWG12/embed');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Gfycat', async () => {
     const service = 'gfycat';
 
-    const url1 = 'https://gfycat.com/EsteemedMarvelousHagfish';
-    const url2 = 'https://gfycat.com/OddCornyLeech';
+    const urls = [
+      {source: 'https://gfycat.com/EsteemedMarvelousHagfish', embed: 'https://gfycat.com/ifr/EsteemedMarvelousHagfish'},
+      {source: 'https://gfycat.com/OddCornyLeech', embed: 'https://gfycat.com/ifr/OddCornyLeech'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://gfycat.com/ifr/EsteemedMarvelousHagfish');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://gfycat.com/ifr/OddCornyLeech');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Twitch channel', async () => {
     const service = 'twitch-channel';
 
-    const url1 = 'https://www.twitch.tv/ninja';
-    const url2 = 'https://www.twitch.tv/gohamedia';
+    const urls = [
+      {source: 'https://www.twitch.tv/ninja', embed: 'https://player.twitch.tv/?channel=ninja'},
+      {source: 'https://www.twitch.tv/gohamedia', embed: 'https://player.twitch.tv/?channel=gohamedia'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://player.twitch.tv/?channel=ninja');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.twitch.tv/?channel=gohamedia');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Twitch video', async () => {
     const service = 'twitch-video';
 
-    const url1 = 'https://www.twitch.tv/videos/315468440';
-    const url2 = 'https://www.twitch.tv/videos/314691366';
+    const urls = [
+      {source: 'https://www.twitch.tv/videos/315468440', embed: 'https://player.twitch.tv/?video=v315468440'},
+      {source: 'https://www.twitch.tv/videos/314691366', embed: 'https://player.twitch.tv/?video=v314691366'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://player.twitch.tv/?video=v315468440');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.twitch.tv/?video=v314691366');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Yandex Music album', async () => {
     const service = 'yandex-music-album';
 
-    const url1 = 'https://music.yandex.ru/album/5643859';
-    const url2 = 'https://music.yandex.ru/album/5393158';
+    const urls = [
+      {source: 'https://music.yandex.ru/album/5643859', embed: 'https://music.yandex.ru/iframe/#album/5643859/'},
+      {source: 'https://music.yandex.ru/album/5393158', embed: 'https://music.yandex.ru/iframe/#album/5393158/'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://music.yandex.ru/iframe/#album/5643859/');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#album/5393158/');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Yandex Music track', async () => {
     const service = 'yandex-music-track';
 
-    const url1 = 'https://music.yandex.ru/album/5643859/track/42662275';
-    const url2 = 'https://music.yandex.ru/album/5393158/track/41249158';
+    const urls = [
+      {source: 'https://music.yandex.ru/album/5643859/track/42662275', embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/'},
+      {source: 'https://music.yandex.ru/album/5393158/track/41249158', embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://music.yandex.ru/iframe/#track/5643859/42662275/');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#track/5393158/41249158/');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Yandex Music playlist', async () => {
     const service = 'yandex-music-playlist';
 
-    const url1 = 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905';
-    const url2 = 'https://music.yandex.ru/users/yamusic-personal/playlists/27924603';
+    const urls = [
+      {source: 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/'},
+      {source: 'https://music.yandex.ru/users/yamusic-personal/playlists/27924603', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Codepen', async () => {
     const service = 'codepen';
 
-    const url1 = 'https://codepen.io/Rikkokiri/pen/RYBrwG';
-    const url2 = 'https://codepen.io/geoffgraham/pen/bxEVEN';
+    const urls = [
+      {source: 'https://codepen.io/Rikkokiri/pen/RYBrwG', embed: 'https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2'},
+      {source: 'https://codepen.io/geoffgraham/pen/bxEVEN', embed: 'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2'}
+    ];
 
-    expect(patterns[service].test(url1)).to.be.true;
-    expect(patterns[service].test(url2)).to.be.true;
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
 
-    const data1 = patternHandler(url1, service);
-    const data2 = patternHandler(url2, service);
+      const data = patternHandler(url.source, service);
 
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2');
-    expect(data1.source).to.be.equal(url1);
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2');
-    expect(data2.source).to.be.equal(url2);
+      expect(data.service).to.be.equal(service);
+      expect(data.embed).to.be.equal(url.embed);
+      expect(data.source).to.be.equal(url.source);
+    });
   });
 
   it('Patterns', async () => {
@@ -263,5 +241,4 @@ describe('Services Regexps', () => {
         expect(foundService[0]).to.be.equal(name);
       });
   });
-
 });

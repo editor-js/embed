@@ -22,8 +22,6 @@ const SERVICES = require('./services');
  * @typedef {Object} EmbedConfig
  * @description Embed tool configuration object
  * @property {Object} [services] - additional services provided by user. Each property should contain Service object
- * @property {string[]} [whitelist] - array of services to use
- * @property {string[]} [blacklist] - array of services to exclude
  */
 
 /**
@@ -35,7 +33,7 @@ const SERVICES = require('./services');
  * @property {HTMLElement} element - embedded content container
  *
  * @property {Object} services - static property with available services
- * @patterns {Object} patterns - static property with patterns for paste handling configuration
+ * @property {Object} patterns - static property with patterns for paste handling configuration
  */
 class Embed {
   /**

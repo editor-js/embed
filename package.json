@@ -11,7 +11,8 @@
   "repository": "https://github.com/codex-editor/embed",
   "main": "./dist/bundle.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --mode production --watch"
+    "build": "webpack --config ./webpack.config.js --mode production --watch",
+    "test": "mocha --recursive ./test"
   },
   "author": {
     "name": "CodeX Team",

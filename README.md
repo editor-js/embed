@@ -2,8 +2,8 @@
 
 # Embed Tool
 
-Provides Block tool to embedding content for the [CodeX Editor](https://ifmo.su/editor).
-Tool use CodeX Editor pasted patterns handling and inserts iframe with embedded content.
+Provides Block tool for embedded content for the [CodeX Editor](https://ifmo.su/editor).
+Tool uses CodeX Editor pasted patterns handling and inserts iframe with embedded content.
 
 ## Installation
 
@@ -56,7 +56,7 @@ var editor = CodexEditor({
 
 ## Available configuration
 
-Embed Tool support some services by default (see the full list [here](docs/services.md)). You can specify services you would like to use:
+Embed Tool supports some services by default (see the full list [here](docs/services.md)). You can specify services you would like to use:
 
 ```javascript
 var editor = CodexEditor({
@@ -79,7 +79,10 @@ var editor = CodexEditor({
 });
 ```
 
+> Note that if you pass services you want to use like in the example above, others will not be enabled.
+
 Also you can provide your own services using simple configuration.
+
 
 First of all you should create a Service configuration object. It contains following fields:
 
