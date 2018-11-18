@@ -186,7 +186,7 @@ class Embed {
       entries = entries.filter(([ key ]) => enabledServices.includes(key));
     }
 
-    entries.concat(userServices);
+    entries = entries.concat(userServices);
 
     Embed.services = entries.reduce((result, [key, service]) => {
       if (!(key in result)) {
@@ -216,8 +216,8 @@ class Embed {
     const {regex, embedUrl, html, height, width, id} = config;
 
     let isValid = regex && regex instanceof RegExp
-      && embedUrl && embedUrl instanceof String
-      && html && html instanceof String;
+      && embedUrl && typeof embedUrl === 'string'
+      && html && typeof html === 'string';
 
     isValid = isValid && (id !== undefined ? id instanceof Function : true);
     isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
