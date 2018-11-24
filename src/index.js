@@ -142,8 +142,7 @@ class Embed {
   /**
    * Handle pasted url and return Service object
    *
-   * @param {string} url - pasted URL
-   * @param {string} service - service service
+   * @param {PasteEvent} event- event with pasted data
    * @return {Service}
    */
   onPaste(event) {
@@ -164,8 +163,6 @@ class Embed {
       width,
       height
     };
-    console.log(url);
-    console.log(this.data);
   }
 
   /**
@@ -249,7 +246,7 @@ class Embed {
   }
 
   /**
-   * OnPaste configuration to enable pasted URLs processing by CodeX Editor
+   * Paste configuration to enable pasted URLs processing by Editor
    */
   static get pasteConfig() {
     return {
