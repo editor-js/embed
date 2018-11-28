@@ -144,10 +144,6 @@ class Embed {
    * @return {Service}
    */
   onPaste(event) {
-    if (event.type !== 'pattern') {
-      return;
-    }
-
     const {key: service, data: url} = event.detail;
 
     const {regex, embedUrl, width, height, id = (ids) => ids.shift()} = Embed.services[service];

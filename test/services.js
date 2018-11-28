@@ -24,34 +24,17 @@ describe('Services Regexps', () => {
       {source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
+      embed.onPaste(event);
 
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://www.youtube.com/embed/ZWO6TQHw7is');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Vimeo', async () => {
@@ -65,33 +48,14 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-    embed.onPaste(event1);
+      embed.onPaste(event);
 
-    const data1 = embed.data;
-
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://player.vimeo.com/video/289836809?title=0&byline=0');
-    expect(data1.source).to.be.equal(url1);
-
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.vimeo.com/video/280712228?title=0&byline=0');
-    expect(data2.source).to.be.equal(url2);
-=======
-      const data = patternHandler(url.source, service);
-
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Coub', async () => {
@@ -102,35 +66,16 @@ describe('Services Regexps', () => {
       {source: 'https://coub.com/view/1c6nrr', embed: 'https://coub.com/embed/1c6nrr'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-<<<<<<< HEAD
-
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://coub.com/embed/1c6nrr');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Imgur', async () => {
@@ -144,33 +89,14 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-    embed.onPaste(event1);
+      embed.onPaste(event);
 
-    const data1 = embed.data;
-
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('http://imgur.com/OHbkxgr/embed');
-    expect(data1.source).to.be.equal(url1);
-
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('http://imgur.com/TqIWG12/embed');
-    expect(data2.source).to.be.equal(url2);
-=======
-      const data = patternHandler(url.source, service);
-
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Gfycat', async () => {
@@ -181,34 +107,16 @@ describe('Services Regexps', () => {
       {source: 'https://gfycat.com/OddCornyLeech', embed: 'https://gfycat.com/ifr/OddCornyLeech'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://gfycat.com/ifr/OddCornyLeech');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Twitch channel', async () => {
@@ -219,34 +127,16 @@ describe('Services Regexps', () => {
       {source: 'https://www.twitch.tv/gohamedia', embed: 'https://player.twitch.tv/?channel=gohamedia'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.twitch.tv/?channel=gohamedia');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Twitch video', async () => {
@@ -260,33 +150,14 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-    embed.onPaste(event1);
+      embed.onPaste(event);
 
-    const data1 = embed.data;
-
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://player.twitch.tv/?video=v315468440');
-    expect(data1.source).to.be.equal(url1);
-
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://player.twitch.tv/?video=v314691366');
-    expect(data2.source).to.be.equal(url2);
-=======
-      const data = patternHandler(url.source, service);
-
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Yandex Music album', async () => {
@@ -297,34 +168,17 @@ describe('Services Regexps', () => {
       {source: 'https://music.yandex.ru/album/5393158', embed: 'https://music.yandex.ru/iframe/#album/5393158/'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
+      embed.onPaste(event);
 
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#album/5393158/');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Yandex Music track', async () => {
@@ -335,34 +189,17 @@ describe('Services Regexps', () => {
       {source: 'https://music.yandex.ru/album/5393158/track/41249158', embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
+      embed.onPaste(event);
 
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#track/5393158/41249158/');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Yandex Music playlist', async () => {
@@ -375,34 +212,14 @@ describe('Services Regexps', () => {
 
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
+      const event = composePasteEventMock('pattern', service, url.source);
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
+      embed.onPaste(event);
 
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-
-    expect(data1.service).to.be.equal(service);
-    expect(data1.embed).to.be.equal('https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/');
-    expect(data1.source).to.be.equal(url1);
-
-    embed.onPaste(event2);
-
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/');
-    expect(data2.source).to.be.equal(url2);
-=======
-      const data = patternHandler(url.source, service);
-
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Codepen', async () => {
@@ -413,34 +230,17 @@ describe('Services Regexps', () => {
       {source: 'https://codepen.io/geoffgraham/pen/bxEVEN', embed: 'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2'}
     ];
 
-<<<<<<< HEAD
-    const event1 = composePasteEventMock('pattern', service, url1);
-    const event2 = composePasteEventMock('pattern', service, url2);
-
-    embed.onPaste(event1);
-
-    const data1 = embed.data;
-=======
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-<<<<<<< HEAD
-    embed.onPaste(event2);
+      embed.onPaste(event);
 
-    const data2 = embed.data;
-
-    expect(data2.service).to.be.equal(service);
-    expect(data2.embed).to.be.equal('https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2');
-    expect(data2.source).to.be.equal(url2);
-=======
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
->>>>>>> 27f13b4520e127d72def9e2fe0497dd44b950a65
   });
 
   it('Patterns', async () => {
