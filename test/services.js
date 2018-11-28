@@ -3,7 +3,16 @@ const {expect} = require('chai');
 const EmbedTool = require('../src/index');
 
 EmbedTool.prepare({});
-const {patternHandler, patterns} = EmbedTool.onPaste;
+const {patterns} = EmbedTool.pasteConfig;
+const embed = new EmbedTool({data: {}});
+
+const composePasteEventMock = (type, service, url) => ({
+  type,
+  detail: {
+    key: service,
+    data: url
+  }
+});
 
 describe('Services Regexps', () => {
   it('YouTube', async () => {
@@ -18,11 +27,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -37,11 +48,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -55,12 +68,13 @@ describe('Services Regexps', () => {
 
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -75,11 +89,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -93,12 +109,13 @@ describe('Services Regexps', () => {
 
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -112,12 +129,13 @@ describe('Services Regexps', () => {
 
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -132,11 +150,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -151,11 +171,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -170,11 +192,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -188,12 +212,13 @@ describe('Services Regexps', () => {
 
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      const data = patternHandler(url.source, service);
+      embed.onPaste(event);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 
@@ -208,11 +233,13 @@ describe('Services Regexps', () => {
     urls.forEach(url => {
       expect(patterns[service].test(url.source)).to.be.true;
 
-      const data = patternHandler(url.source, service);
+      const event = composePasteEventMock('pattern', service, url.source);
 
-      expect(data.service).to.be.equal(service);
-      expect(data.embed).to.be.equal(url.embed);
-      expect(data.source).to.be.equal(url.source);
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
     });
   });
 

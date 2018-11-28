@@ -60,20 +60,26 @@ class Embed {
    * @param {string} [data.caption] - caption
    */
   set data(data) {
-    if (!data instanceof Object) {
+    if (!(data instanceof Object)) {
       throw Error('Embed Tool data should be object');
     }
 
     const {service, source, embed, width, height, caption = ''} = data;
 
     this._data = {
-      service: this.data.service || service,
-      source: this.data.source || source,
-      embed: this.data.embed || embed,
-      width: this.data.width || width,
-      height: this.data.height || height,
-      caption: this.data.caption || caption
+      service: service || this.data.service,
+      source: source || this.data.source,
+      embed: embed || this.data.embed,
+      width: width || this.data.width,
+      height: height || this.data.height,
+      caption: caption || this.data.caption || '',
     };
+
+    const oldView = this.element;
+
+    if (oldView) {
+      oldView.parentNode.replaceChild(this.render(), oldView);
+    }
   }
 
   /**
@@ -89,6 +95,14 @@ class Embed {
    * @return {HTMLElement}
    */
   render() {
+    if (!this.data.service) {
+      const container = document.createElement('div');
+
+      this.element = container;
+
+      return container;
+    }
+
     const {html} = Embed.services[this.data.service];
     const container = document.createElement('div');
     const caption = document.createElement('div');
@@ -97,7 +111,7 @@ class Embed {
     caption.contentEditable = true;
     caption.classList.add(this.api.styles.input);
     caption.dataset.placeholder = 'Enter a caption';
-    caption.innerHTML = this.data.caption;
+    caption.innerHTML = this.data.caption || '';
 
     template.innerHTML = html;
     template.content.firstChild.setAttribute('src', this.data.embed);
@@ -126,16 +140,17 @@ class Embed {
   /**
    * Handle pasted url and return Service object
    *
-   * @param {string} url - pasted URL
-   * @param {string} service - service service
+   * @param {PasteEvent} event- event with pasted data
    * @return {Service}
    */
-  static pasteHandler(url, service) {
+  onPaste(event) {
+    const {key: service, data: url} = event.detail;
+
     const {regex, embedUrl, width, height, id = (ids) => ids.shift()} = Embed.services[service];
     const result = regex.exec(url).slice(1);
     const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
 
-    return {
+    this.data = {
       service,
       source: url,
       embed,
@@ -225,12 +240,11 @@ class Embed {
   }
 
   /**
-   * OnPaste configuration to enable pasted URLs processing by CodeX Editor
+   * Paste configuration to enable pasted URLs processing by Editor
    */
-  static get onPaste() {
+  static get pasteConfig() {
     return {
-      patterns: Embed.patterns,
-      patternHandler: Embed.pasteHandler
+      patterns: Embed.patterns
     };
   }
 }
