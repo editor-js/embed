@@ -1,4 +1,6 @@
 const SERVICES = require('./services');
+const PRELOADER_TIMER = 450;
+import './index.css';
 
 /**
  * @typedef {Object} EmbedData
@@ -107,6 +109,12 @@ class Embed {
     const container = document.createElement('div');
     const caption = document.createElement('div');
     const template = document.createElement('template');
+    const preloader = document.createElement('div');
+
+    preloader.classList.add('ce-embed-preloader');
+    preloader.textContent = 'loading...';
+
+    container.appendChild(preloader);
 
     caption.contentEditable = true;
     caption.classList.add(this.api.styles.input);
@@ -117,8 +125,14 @@ class Embed {
     template.content.firstChild.setAttribute('src', this.data.embed);
     template.content.firstChild.classList.add(this.api.styles.block);
 
-    container.appendChild(template.content.firstChild);
-    container.appendChild(caption);
+    this.embedIsReady(container).then(() => {
+      setTimeout(() => {
+        preloader.textContent = '';
+      }, PRELOADER_TIMER);
+
+      container.appendChild(template.content.firstChild);
+      container.appendChild(caption);
+    });
 
     this.element = container;
 
@@ -246,6 +260,47 @@ class Embed {
     return {
       patterns: Embed.patterns
     };
+  }
+
+ /**
+  * Listens for mutations in specified node
+  * @param {HTMLElement} targetNode
+  */
+  observeNode(targetNode) {
+    const config = {childList: true, subtree: true };
+
+    let observer = new MutationObserver((mutationList, observer) => {
+      this.mutationHandler(mutationList, observer);
+    });
+
+    observer.observe(targetNode, config);
+  }
+
+ /**
+  * Waits until all mutations have finished
+  * @param {MutationEvent[]} mutationList - list of mutation events
+  * @param {MutationObserver} observer - MutationObserver instance
+  * @return {boolean} mutationIsFinished - status of element's mutations
+  */
+  mutationHandler(mutationList, observer) {
+    let mutationIsFinished = false;
+
+    mutationList.forEach((mutation) => {
+        mutationIsFinished = true;
+    });
+
+    return mutationIsFinished;
+  }
+
+ /**
+  *
+  * @param {HTMLElement} node - HTML-element mutations of which to listen
+  * @return {Promise<any>} - result that all mutations have finished
+  */
+  embedIsReady(node) {
+    return new Promise((resolve, reject) => {
+      resolve(this.observeNode(node));
+    });
   }
 }
 
