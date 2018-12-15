@@ -1,6 +1,7 @@
 const SERVICES = require('./services');
 const PRELOADER_TIMER = 450;
 import './index.css';
+import {debounce} from 'debounce';
 
 /**
  * @typedef {Object} EmbedData
@@ -126,13 +127,14 @@ class Embed {
     template.content.firstChild.classList.add(this.api.styles.block);
 
     this.embedIsReady(container).then(() => {
+      preloader.textContent = '';
+    }).then(
+      container.appendChild(template.content.firstChild)
+    ).then(
       setTimeout(() => {
-        preloader.textContent = '';
-      }, PRELOADER_TIMER);
-
-      container.appendChild(template.content.firstChild);
-      container.appendChild(caption);
-    });
+        container.appendChild(caption);
+      }, PRELOADER_TIMER)
+    );
 
     this.element = container;
 
@@ -261,45 +263,18 @@ class Embed {
       patterns: Embed.patterns
     };
   }
-
- /**
-  * Listens for mutations in specified node
-  * @param {HTMLElement} targetNode
-  */
-  observeNode(targetNode) {
-    const config = {childList: true, subtree: true };
-
-    let observer = new MutationObserver((mutationList, observer) => {
-      this.mutationHandler(mutationList, observer);
-    });
-
-    observer.observe(targetNode, config);
-  }
-
- /**
-  * Waits until all mutations have finished
-  * @param {MutationEvent[]} mutationList - list of mutation events
-  * @param {MutationObserver} observer - MutationObserver instance
-  * @return {boolean} mutationIsFinished - status of element's mutations
-  */
-  mutationHandler(mutationList, observer) {
-    let mutationIsFinished = false;
-
-    mutationList.forEach((mutation) => {
-        mutationIsFinished = true;
-    });
-
-    return mutationIsFinished;
-  }
-
- /**
-  *
-  * @param {HTMLElement} node - HTML-element mutations of which to listen
-  * @return {Promise<any>} - result that all mutations have finished
-  */
-  embedIsReady(node) {
+  /**
+   *
+   * @param {HTMLElement} targetNode - HTML-element mutations of which to listen
+   * @return {Promise<any>} - result that all mutations have finished
+   */
+  embedIsReady(targetNode) {
     return new Promise((resolve, reject) => {
-      resolve(this.observeNode(node));
+      let observer = new MutationObserver(debounce(() => {
+          resolve();
+      }, PRELOADER_TIMER));
+
+      observer.observe(targetNode, {childList: true, subtree: true});
     });
   }
 }
