@@ -134,6 +134,8 @@ class Embed {
 
     embedIsReady.then(() => {
       container.removeChild(preloader);
+    }).then(() => {
+        this.observer.disconnect();
     });
 
     this.element = container;
@@ -277,7 +279,6 @@ class Embed {
       }, PRELOADER_TIMER));
 
       this.observer.observe(targetNode, {childList: true, subtree: true});
-      this.observer.disconnect();
     });
   }
 }
