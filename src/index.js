@@ -49,10 +49,7 @@ class Embed {
     this.api = api;
     this._data = {};
     this.element = null;
-    this.observerConfig = {
-        childList: true,
-        subtree: true
-    };
+    this.observer = null;
 
     this.data = data;
   }
@@ -130,10 +127,12 @@ class Embed {
     template.content.firstChild.setAttribute('src', this.data.embed);
     template.content.firstChild.classList.add(this.api.styles.block);
 
+    let embedIsReady = this.embedIsReady(container);
+
     container.appendChild(template.content.firstChild);
     container.appendChild(caption);
 
-    this.embedIsReady(container).then(() => {
+    embedIsReady.then(() => {
       container.removeChild(preloader);
     });
 
@@ -273,11 +272,12 @@ class Embed {
     const PRELOADER_TIMER = 450;
 
     return new Promise((resolve, reject) => {
-      let observer = new MutationObserver(debounce(() => {
+      this.observer = new MutationObserver(debounce(() => {
           resolve();
       }, PRELOADER_TIMER));
 
-      observer.observe(targetNode, this.observerConfig);
+      this.observer.observe(targetNode, {childList: true, subtree: true});
+      this.observer = null;
     });
   }
 }
