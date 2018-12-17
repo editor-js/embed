@@ -1,5 +1,4 @@
 const SERVICES = require('./services');
-const PRELOADER_TIMER = 450;
 import './index.css';
 import {debounce} from 'debounce';
 
@@ -126,15 +125,12 @@ class Embed {
     template.content.firstChild.setAttribute('src', this.data.embed);
     template.content.firstChild.classList.add(this.api.styles.block);
 
+    container.appendChild(template.content.firstChild);
+    container.appendChild(caption);
+
     this.embedIsReady(container).then(() => {
       preloader.textContent = '';
-    }).then(
-      container.appendChild(template.content.firstChild)
-    ).then(
-      setTimeout(() => {
-        container.appendChild(caption);
-      }, PRELOADER_TIMER)
-    );
+    });
 
     this.element = container;
 
@@ -269,6 +265,8 @@ class Embed {
    * @return {Promise<any>} - result that all mutations have finished
    */
   embedIsReady(targetNode) {
+    const PRELOADER_TIMER = 450;
+
     return new Promise((resolve, reject) => {
       let observer = new MutationObserver(debounce(() => {
           resolve();
