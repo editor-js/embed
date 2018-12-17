@@ -33,6 +33,7 @@ import {debounce} from 'debounce';
  * @property {Object} api - CodeX Editor API
  * @property {EmbedData} _data - private property with Embed data
  * @property {HTMLElement} element - embedded content container
+ * @property {Object} observerConfig - config of mutationsObserver listening for container changes
  *
  * @property {Object} services - static property with available services
  * @property {Object} patterns - static property with patterns for paste handling configuration
@@ -48,6 +49,10 @@ class Embed {
     this.api = api;
     this._data = {};
     this.element = null;
+    this.observerConfig = {
+        childList: true,
+        subtree: true
+    };
 
     this.data = data;
   }
@@ -129,7 +134,7 @@ class Embed {
     container.appendChild(caption);
 
     this.embedIsReady(container).then(() => {
-      preloader.textContent = '';
+      container.removeChild(preloader);
     });
 
     this.element = container;
@@ -272,7 +277,7 @@ class Embed {
           resolve();
       }, PRELOADER_TIMER));
 
-      observer.observe(targetNode, {childList: true, subtree: true});
+      observer.observe(targetNode, this.observerConfig);
     });
   }
 }
