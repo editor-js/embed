@@ -277,7 +277,7 @@ class Embed {
       }, PRELOADER_TIMER));
 
       this.observer.observe(targetNode, {childList: true, subtree: true});
-      this.observer = null;
+      this.observer.disconnect();
     });
   }
 }
