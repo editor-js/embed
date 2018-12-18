@@ -11,7 +11,16 @@ module.exports = {
         test: /\.css$/,
         use: [
           "style-loader",
-          "css-loader"
+          "css-loader",
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [
+                require('postcss-nested-ancestors'),
+                require('postcss-nested')
+              ]
+            }
+          }
         ]
       }
     ]

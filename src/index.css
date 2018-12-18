@@ -1,6 +1,46 @@
-.ce-embed-preloader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.embed-tool {
+  &--loading {
+    border-radius: 5px;
+    border: 1px solid #e6e9eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ^&__caption {
+        display: none;
+    }
+
+    ^&__preloader {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      position: absolute;
+
+      &::after {
+        content: '';
+        position: absolute;
+        z-index: 3;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid #cdd1e0;
+        border-top-color: #388ae5;
+        left: 50%;
+        top: 50%;
+        margin-top: -30px;
+        margin-left: -30px;
+        animation: embed-preloader-spin 2s infinite linear;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+@keyframes embed-preloader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

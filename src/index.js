@@ -94,6 +94,19 @@ class Embed {
   }
 
   /**
+   * Get plugin styles
+   * @return {Object}
+   */
+  get CSS() {
+    return {
+      container: 'embed-tool',
+      containerLoading: 'embed-tool--loading',
+      preloader: 'embed-tool__preloader',
+      caption: 'embed-tool__caption',
+    };
+  }
+
+  /**
    * Render Embed tool content
    *
    * @return {HTMLElement}
@@ -113,8 +126,9 @@ class Embed {
     const template = document.createElement('template');
     const preloader = document.createElement('div');
 
-    preloader.classList.add('ce-embed-preloader');
-    preloader.textContent = 'loading...';
+    container.classList.add(this.CSS.container, this.CSS.containerLoading);
+    preloader.classList.add(this.CSS.preloader);
+    caption.classList.add(this.CSS.caption);
 
     container.appendChild(preloader);
 
@@ -134,6 +148,7 @@ class Embed {
 
     embedIsReady.then(() => {
       container.removeChild(preloader);
+      container.classList.remove(this.CSS.containerLoading);
     }).then(() => {
         this.observer.disconnect();
     });
@@ -265,18 +280,19 @@ class Embed {
       patterns: Embed.patterns
     };
   }
+
   /**
-   *
+   * Checks that mutations in DOM have finished after appending iframe content
    * @param {HTMLElement} targetNode - HTML-element mutations of which to listen
    * @return {Promise<any>} - result that all mutations have finished
    */
   embedIsReady(targetNode) {
-    const PRELOADER_TIMER = 450;
+    const PRELOADER_DELAY = 450;
 
     return new Promise((resolve, reject) => {
       this.observer = new MutationObserver(debounce(() => {
           resolve();
-      }, PRELOADER_TIMER));
+      }, PRELOADER_DELAY));
 
       this.observer.observe(targetNode, {childList: true, subtree: true});
     });
