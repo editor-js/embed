@@ -99,6 +99,7 @@ class Embed {
    */
   get CSS() {
     return {
+      baseClass: this.api.styles.block,
       container: 'embed-tool',
       containerLoading: 'embed-tool--loading',
       preloader: 'embed-tool__preloader',
@@ -130,7 +131,7 @@ class Embed {
 
     url.innerText = this.data.source;
 
-    container.classList.add(this.CSS.container, this.CSS.containerLoading);
+    container.classList.add(this.CSS.baseClass, this.CSS.container, this.CSS.containerLoading);
     preloader.classList.add(this.CSS.preloader);
     caption.classList.add(this.CSS.caption);
     url.classList.add(this.CSS.url);
