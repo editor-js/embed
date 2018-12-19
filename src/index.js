@@ -100,6 +100,7 @@ class Embed {
   get CSS() {
     return {
       baseClass: this.api.styles.block,
+      input: this.api.styles.input,
       container: 'embed-tool',
       containerLoading: 'embed-tool--loading',
       preloader: 'embed-tool__preloader',
@@ -133,20 +134,18 @@ class Embed {
 
     container.classList.add(this.CSS.baseClass, this.CSS.container, this.CSS.containerLoading);
     preloader.classList.add(this.CSS.preloader);
-    caption.classList.add(this.CSS.caption);
+    caption.classList.add(this.CSS.input, this.CSS.caption);
     url.classList.add(this.CSS.url);
 
     container.appendChild(preloader);
     container.appendChild(url);
 
     caption.contentEditable = true;
-    caption.classList.add(this.api.styles.input);
     caption.dataset.placeholder = 'Enter a caption';
     caption.innerHTML = this.data.caption || '';
 
     template.innerHTML = html;
     template.content.firstChild.setAttribute('src', this.data.embed);
-    template.content.firstChild.classList.add(this.api.styles.block);
 
     const embedIsReady = this.embedIsReady(container);
 
