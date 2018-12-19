@@ -1,5 +1,6 @@
 .embed-tool {
   &--loading {
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,31 +8,30 @@
     border: 1px solid #e6e9eb;
 
     ^&__caption {
-        display: none;
+      display: none;
     }
 
     ^&__preloader {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      z-index: 3;
+      left: 50%;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      margin-top: -25px;
+      margin-left: -15px;
       border-radius: 50%;
+      border: 2px solid #cdd1e0;
+      border-top-color: #388ae5;
+      box-sizing: border-box;
+      animation: embed-preloader-spin 2s infinite linear;
+    }
 
-      &::after {
-        position: absolute;
-        z-index: 3;
-        left: 50%;
-        top: 50%;
-        width: 60px;
-        height: 60px;
-        margin-top: -30px;
-        margin-left: -30px;
-        border-radius: 50%;
-        border: 2px solid #cdd1e0;
-        border-top-color: #388ae5;
-        box-sizing: border-box;
-        content: '';
-        animation: embed-preloader-spin 2s infinite linear;
-      }
+    ^&__url {
+      position: absolute;
+      bottom: 20px;
+      color: #7b7e89;
+      font-size: 11px;
     }
   }
 }

@@ -103,6 +103,7 @@ class Embed {
       containerLoading: 'embed-tool--loading',
       preloader: 'embed-tool__preloader',
       caption: 'embed-tool__caption',
+      url: 'embed-tool__url'
     };
   }
 
@@ -125,12 +126,17 @@ class Embed {
     const caption = document.createElement('div');
     const template = document.createElement('template');
     const preloader = document.createElement('div');
+    const url = document.createElement('div');
+
+    url.innerText = this.data.source;
 
     container.classList.add(this.CSS.container, this.CSS.containerLoading);
     preloader.classList.add(this.CSS.preloader);
     caption.classList.add(this.CSS.caption);
+    url.classList.add(this.CSS.url);
 
     container.appendChild(preloader);
+    container.appendChild(url);
 
     caption.contentEditable = true;
     caption.classList.add(this.api.styles.input);
@@ -148,6 +154,7 @@ class Embed {
 
     embedIsReady.then(() => {
       container.removeChild(preloader);
+      container.removeChild(url);
       container.classList.remove(this.CSS.containerLoading);
     }).then(() => {
         this.observer.disconnect();
