@@ -141,7 +141,7 @@ class Embed {
     template.content.firstChild.setAttribute('src', this.data.embed);
     template.content.firstChild.classList.add(this.api.styles.block);
 
-    let embedIsReady = this.embedIsReady(container);
+    const embedIsReady = this.embedIsReady(container);
 
     container.appendChild(template.content.firstChild);
     container.appendChild(caption);
@@ -290,9 +290,7 @@ class Embed {
     const PRELOADER_DELAY = 450;
 
     return new Promise((resolve, reject) => {
-      this.observer = new MutationObserver(debounce(() => {
-          resolve();
-      }, PRELOADER_DELAY));
+      this.observer = new MutationObserver(debounce(resolve, PRELOADER_DELAY));
 
       this.observer.observe(targetNode, {childList: true, subtree: true});
     });
