@@ -38,6 +38,10 @@
       text-overflow: ellipsis;
     }
   }
+
+  &__caption {
+    margin-top: 7px;
+  }
 }
 
 @keyframes embed-preloader-spin {
