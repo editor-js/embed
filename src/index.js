@@ -127,18 +127,12 @@ class Embed {
     const container = document.createElement('div');
     const caption = document.createElement('div');
     const template = document.createElement('template');
-    const preloader = document.createElement('div');
-    const url = document.createElement('div');
-
-    url.innerText = this.data.source;
+    const preloader = this.createPreloader();
 
     container.classList.add(this.CSS.baseClass, this.CSS.container, this.CSS.containerLoading);
-    preloader.classList.add(this.CSS.preloader);
     caption.classList.add(this.CSS.input, this.CSS.caption);
-    url.classList.add(this.CSS.url);
 
     container.appendChild(preloader);
-    container.appendChild(url);
 
     caption.contentEditable = true;
     caption.dataset.placeholder = 'Enter a caption';
@@ -153,16 +147,32 @@ class Embed {
     container.appendChild(caption);
 
     embedIsReady.then(() => {
-      container.removeChild(preloader);
-      container.removeChild(url);
       container.classList.remove(this.CSS.containerLoading);
     }).then(() => {
-        this.observer.disconnect();
+      this.observer.disconnect();
     });
 
     this.element = container;
 
     return container;
+  }
+
+  /**
+   * Creates preloader to append to container while data is loading
+   * @return {HTMLElement} preloader
+   */
+  createPreloader() {
+    const preloader = document.createElement('preloader');
+    const url = document.createElement('div');
+
+    url.innerText = this.data.source;
+
+    preloader.classList.add(this.CSS.preloader);
+    url.classList.add(this.CSS.url);
+
+    preloader.appendChild(url);
+
+    return preloader;
   }
 
   /**

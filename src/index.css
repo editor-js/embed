@@ -1,7 +1,10 @@
 .embed-tool {
+  box-sizing: border-box;
+
   &--loading {
     height: 200px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 5px;
@@ -12,6 +15,20 @@
     }
 
     ^&__preloader {
+      display: block;
+    }
+  }
+
+  &__preloader {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    &::before {
+      content: '';
       position: absolute;
       z-index: 3;
       left: 50%;
@@ -26,17 +43,19 @@
       box-sizing: border-box;
       animation: embed-preloader-spin 2s infinite linear;
     }
+  }
 
-    ^&__url {
-      position: absolute;
-      bottom: 20px;
-      max-width: 250px;
-      color: #7b7e89;
-      font-size: 11px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  &__url {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 250px;
+    color: #7b7e89;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__caption {
