@@ -146,11 +146,12 @@ class Embed {
     container.appendChild(template.content.firstChild);
     container.appendChild(caption);
 
-    embedIsReady.then(() => {
-      container.classList.remove(this.CSS.containerLoading);
-    }).then(() => {
-      this.observer.disconnect();
-    });
+    embedIsReady
+      .then(() => {
+        container.classList.remove(this.CSS.containerLoading);
+      }).then(() => {
+        this.observer.disconnect();
+      });
 
     this.element = container;
 
