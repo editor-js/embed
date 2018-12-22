@@ -1,14 +1,5 @@
 .embed-tool {
-  box-sizing: border-box;
-
   &--loading {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid #e6e9eb;
 
     ^&__caption {
       display: none;
@@ -17,15 +8,19 @@
     ^&__preloader {
       display: block;
     }
+
+    ^&__content {
+      display: none;
+    }
   }
 
   &__preloader {
     display: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    position: relative;
+    height: 200px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #e6e9eb;
 
     &::before {
       content: '';

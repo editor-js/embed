@@ -105,7 +105,8 @@ class Embed {
       containerLoading: 'embed-tool--loading',
       preloader: 'embed-tool__preloader',
       caption: 'embed-tool__caption',
-      url: 'embed-tool__url'
+      url: 'embed-tool__url',
+      content: 'embed-tool__content'
     };
   }
 
@@ -140,6 +141,7 @@ class Embed {
 
     template.innerHTML = html;
     template.content.firstChild.setAttribute('src', this.data.embed);
+    template.content.firstChild.classList.add(this.CSS.content);
 
     const embedIsReady = this.embedIsReady(container);
 
@@ -149,8 +151,6 @@ class Embed {
     embedIsReady
       .then(() => {
         container.classList.remove(this.CSS.containerLoading);
-      }).then(() => {
-        this.observer.disconnect();
       });
 
     this.element = container;
@@ -166,7 +166,7 @@ class Embed {
     const preloader = document.createElement('preloader');
     const url = document.createElement('div');
 
-    url.innerText = this.data.source;
+    url.textContent = this.data.source;
 
     preloader.classList.add(this.CSS.preloader);
     url.classList.add(this.CSS.url);
@@ -309,8 +309,9 @@ class Embed {
 
     return new Promise((resolve, reject) => {
       this.observer = new MutationObserver(debounce(resolve, PRELOADER_DELAY));
-
       this.observer.observe(targetNode, {childList: true, subtree: true});
+    }).finally(() => {
+      this.observer.disconnect();
     });
   }
 }
