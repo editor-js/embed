@@ -310,7 +310,7 @@ class Embed {
     return new Promise((resolve, reject) => {
       observer = new MutationObserver(debounce(resolve, PRELOADER_DELAY));
       observer.observe(targetNode, {childList: true, subtree: true});
-    }).finally(() => {
+    }).then(() => {
       observer.disconnect();
     });
   }
