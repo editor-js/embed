@@ -1,6 +1,6 @@
 {
   "name": "codex.editor.embed",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "keywords": [
     "codex editor",
     "embed",
@@ -24,7 +24,11 @@
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "css-loader": "^1.0.0",
+    "debounce": "^1.2.0",
     "mocha": "^5.2.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-nested-ancestors": "^2.0.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0"
