@@ -88,10 +88,10 @@ class Embed {
    * @return {EmbedData}
    */
   get data() {
-    if (this.element && this.element.querySelector(`.${this.api.styles.input}`)) {
+    if (this.element) {
       const caption = this.element.querySelector(`.${this.api.styles.input}`);
 
-      this._data.caption = caption.innerHTML;
+      this._data.caption = caption ? caption.innerHTML : '';
     }
 
     return this._data;
