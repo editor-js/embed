@@ -48,6 +48,7 @@ class Embed {
     this.api = api;
     this._data = {};
     this.element = null;
+    this.viewRendered = false;
 
     this.data = data;
   }
@@ -79,7 +80,7 @@ class Embed {
 
     const oldView = this.element;
 
-    if (oldView) {
+    if (oldView && !this.viewRendered) {
       oldView.parentNode.replaceChild(this.render(), oldView);
     }
   }
@@ -148,6 +149,7 @@ class Embed {
 
     embedIsReady
       .then(() => {
+        this.viewRendered = true;
         container.classList.remove(this.CSS.containerLoading);
       });
 
