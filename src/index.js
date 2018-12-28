@@ -154,7 +154,6 @@ class Embed {
 
     embedIsReady
       .then(() => {
-        this.viewRendered = true;
         container.classList.remove(this.CSS.containerLoading);
       });
 
