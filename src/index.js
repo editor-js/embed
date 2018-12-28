@@ -48,7 +48,6 @@ class Embed {
     this.api = api;
     this._data = {};
     this.element = null;
-    this.viewRendered = false;
 
     this.data = data;
   }
@@ -80,7 +79,7 @@ class Embed {
 
     const oldView = this.element;
 
-    if (oldView && !this.viewRendered) {
+    if (oldView) {
       oldView.parentNode.replaceChild(this.render(), oldView);
     }
   }
@@ -89,6 +88,12 @@ class Embed {
    * @return {EmbedData}
    */
   get data() {
+    if (this.element && this.element.querySelector(`.${this.api.styles.input}`)) {
+      const caption = this.element.querySelector(`.${this.api.styles.input}`);
+
+      this._data.caption = caption.innerHTML;
+    }
+
     return this._data;
   }
 
@@ -182,9 +187,6 @@ class Embed {
    * @return {EmbedData}
    */
   save() {
-    const caption = this.element.querySelector(`.${this.api.styles.input}`);
-
-    this.data = {caption: caption.innerHTML};
     return this.data;
   }
 
