@@ -88,6 +88,12 @@ class Embed {
    * @return {EmbedData}
    */
   get data() {
+    if (this.element) {
+      const caption = this.element.querySelector(`.${this.api.styles.input}`);
+
+      this._data.caption = caption ? caption.innerHTML : '';
+    }
+
     return this._data;
   }
 
@@ -180,9 +186,6 @@ class Embed {
    * @return {EmbedData}
    */
   save() {
-    const caption = this.element.querySelector(`.${this.api.styles.input}`);
-
-    this.data = {caption: caption.innerHTML};
     return this.data;
   }
 
