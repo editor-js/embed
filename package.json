@@ -1,14 +1,16 @@
 {
-  "name": "codex.editor.embed",
+  "name": "@editorjs/embed",
   "version": "2.1.2",
   "keywords": [
     "codex editor",
     "embed",
-    "tool"
+    "tool",
+    "editor.js",
+    "editorjs"
   ],
-  "description": "Embed Tool for CodeX.Editor",
+  "description": "Embed Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/codex-editor/embed",
+  "repository": "https://github.com/editorjs/embed",
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js --mode production --watch",
