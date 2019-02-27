@@ -13,7 +13,8 @@
   "repository": "https://github.com/editorjs/embed",
   "main": "./dist/bundle.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --mode production --watch",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode production --watch",
     "test": "mocha --recursive ./test"
   },
   "author": {
@@ -21,9 +22,9 @@
     "email": "team@ifmo.su"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "css-loader": "^1.0.0",
     "debounce": "^1.2.0",
@@ -33,11 +34,6 @@
     "postcss-nested-ancestors": "^2.0.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
+    "webpack-cli": "^3.2.3"
   }
 }
