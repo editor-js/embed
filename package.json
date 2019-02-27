@@ -14,7 +14,7 @@
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
-    "build:dev": "webpack --mode production --watch",
+    "build:dev": "webpack --mode development --watch",
     "test": "mocha --recursive ./test"
   },
   "author": {
