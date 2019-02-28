@@ -1,6 +1,6 @@
-const {expect} = require('chai');
+import {expect} from 'chai';
 
-const EmbedTool = require('../src/index');
+import EmbedTool from '../src/index';
 
 EmbedTool.prepare({});
 const {patterns} = EmbedTool.pasteConfig;

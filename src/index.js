@@ -1,4 +1,4 @@
-const SERVICES = require('./services');
+import SERVICES from './services';
 import './index.css';
 import {debounce} from 'debounce';
 
