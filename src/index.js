@@ -37,7 +37,7 @@ import {debounce} from 'debounce';
  * @property {Object} services - static property with available services
  * @property {Object} patterns - static property with patterns for paste handling configuration
  */
-class Embed {
+export default class Embed {
   /**
    * @param {{data: EmbedData, config: EmbedConfig, api: object}}
    *   data — previously saved data
@@ -318,5 +318,3 @@ class Embed {
     });
   }
 }
-
-module.exports = Embed;

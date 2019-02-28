@@ -37,6 +37,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
     library: 'Embed',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   }
 };
