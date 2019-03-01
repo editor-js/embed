@@ -10,7 +10,7 @@
   ],
   "description": "Embed Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/editorjs/embed",
+  "repository": "https://github.com/editor-js/embed",
   "main": "./dist/bundle.js",
   "scripts": {
     "build": "webpack --mode production",
