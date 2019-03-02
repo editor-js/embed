@@ -1,41 +1,43 @@
 {
-  "name": "codex.editor.embed",
-  "version": "2.1.2",
+  "name": "@editorjs/embed",
+  "version": "2.2.0",
   "keywords": [
     "codex editor",
     "embed",
-    "tool"
+    "tool",
+    "editor.js",
+    "editorjs"
   ],
-  "description": "Embed Tool for CodeX.Editor",
+  "description": "Embed Tool for Editor.js",
   "license": "MIT",
-  "repository": "https://github.com/codex-editor/embed",
+  "repository": "https://github.com/editor-js/embed",
   "main": "./dist/bundle.js",
   "scripts": {
-    "build": "webpack --config ./webpack.config.js --mode production --watch",
-    "test": "mocha --recursive ./test"
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development --watch",
+    "test": "mocha -r @babel/register -r ignore-styles --recursive ./test"
   },
   "author": {
     "name": "CodeX Team",
     "email": "team@ifmo.su"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.3.4",
+    "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "css-loader": "^1.0.0",
     "debounce": "^1.2.0",
+    "ignore-styles": "^5.0.1",
     "mocha": "^5.2.0",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.1.1",
     "postcss-nested-ancestors": "^2.0.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.3",
-    "webpack-cli": "^3.1.0"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
+    "webpack-cli": "^3.2.3"
   }
 }

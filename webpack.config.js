@@ -5,13 +5,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ]
       },
       {
         test: /\.css$/,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -29,7 +33,8 @@ module.exports = {
     path: __dirname + '/dist',
     publicPath: '/',
     filename: 'bundle.js',
-    library: "Embed",
-    libraryTarget: 'umd'
+    library: 'Embed',
+    libraryTarget: 'umd',
+    libraryExport: 'default'
   }
 };

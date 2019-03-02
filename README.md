@@ -1,9 +1,9 @@
-![](https://badgen.net/badge/CodeX%20Editor/v2.0/blue)
+![](https://badgen.net/badge/Editor.js/v2.0/blue)
 
 # Embed Tool
 
-Provides Block tool for embedded content for the [CodeX Editor](https://ifmo.su/editor).
-Tool uses CodeX Editor pasted patterns handling and inserts iframe with embedded content.
+Provides Block tool for embedded content for the [Editor.js](https://editorjs.io).
+Tool uses Editor.js pasted patterns handling and inserts iframe with embedded content.
 
 ## Installation
 
@@ -12,13 +12,13 @@ Tool uses CodeX Editor pasted patterns handling and inserts iframe with embedded
 Get the package
 
 ```shell
-npm i --save-dev codex.editor.embed
+npm i --save-dev @editorjs/embed
 ```
 
 Include module at your application
 
 ```javascript
-const Embed = require('codex.editor.embed');
+const Embed = require('@editorjs/embed');
 ```
 
 ### Download to your project's source dir
@@ -27,11 +27,11 @@ const Embed = require('codex.editor.embed');
 2. Add `dist/bundle.js` file to your page.
 
 ### Load from CDN
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/codex.editor.embed).
+You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/embed).
 
-`https://cdn.jsdelivr.net/npm/codex.editor.embed@2.0.0`
+`https://cdn.jsdelivr.net/npm/@editorjs/embed@2.0.0`
 
-Then require this script on page with CodeX Editor.
+Then require this script on page with Editor.js.
 
 ```html
 <script src="..."></script>
@@ -39,10 +39,10 @@ Then require this script on page with CodeX Editor.
 
 ## Usage
 
-Add a new Tool to the `tools` property of the CodeX Editor initial config.
+Add a new Tool to the `tools` property of the Editor.js initial config.
 
 ```javascript
-var editor = CodexEditor({
+var editor = EditorJS({
   ...
 
   tools: {
@@ -59,7 +59,7 @@ var editor = CodexEditor({
 Embed Tool supports some services by default (see the full list [here](docs/services.md)). You can specify services you would like to use:
 
 ```javascript
-var editor = CodexEditor({
+var editor = EditorJS({
   ...
 
   tools: {
@@ -111,7 +111,7 @@ Example:
 When you create a Service configuration object, you can provide it with Tool\`s configuration:
 
 ```javascript
-var editor = CodexEditor({
+var editor = EditorJS({
   ...
 
   tools: {
@@ -140,10 +140,10 @@ var editor = CodexEditor({
 ```
 
 #### Inline Toolbar
-CodeX Editor provides useful inline toolbar. You can allow it\`s usage in the Embed Tool caption by providing `inlineToolbar: true`.
+Editor.js provides useful inline toolbar. You can allow it\`s usage in the Embed Tool caption by providing `inlineToolbar: true`.
 
 ```javascript
-var editor = CodexEditor({
+var editor = EditorJS({
   ...
 
   tools: {

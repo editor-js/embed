@@ -1,4 +1,4 @@
-const SERVICES = require('./services');
+import SERVICES from './services';
 import './index.css';
 import {debounce} from 'debounce';
 
@@ -28,21 +28,21 @@ import {debounce} from 'debounce';
 
 /**
  * @class Embed
- * @classdesc Embed Tool for CodeX Editor 2.0
+ * @classdesc Embed Tool for Editor.js 2.0
  *
- * @property {Object} api - CodeX Editor API
+ * @property {Object} api - Editor.js API
  * @property {EmbedData} _data - private property with Embed data
  * @property {HTMLElement} element - embedded content container
  *
  * @property {Object} services - static property with available services
  * @property {Object} patterns - static property with patterns for paste handling configuration
  */
-class Embed {
+export default class Embed {
   /**
    * @param {{data: EmbedData, config: EmbedConfig, api: object}}
    *   data — previously saved data
    *   config - user config for Tool
-   *   api - CodeX Editor API
+   *   api - Editor.js API
    */
   constructor({data, api}) {
     this.api = api;
@@ -318,5 +318,3 @@ class Embed {
     });
   }
 }
-
-module.exports = Embed;
