@@ -2,7 +2,7 @@
 
 # Embed Tool
 
-Provides Block tool for embedded content for the [Editor.js](https://ifmo.su/editor).
+Provides Block tool for embedded content for the [Editor.js](https://editorjs.io).
 Tool uses Editor.js pasted patterns handling and inserts iframe with embedded content.
 
 ## Installation
