@@ -57,10 +57,22 @@
     margin-top: 7px;
 
 
-  &[contentEditable=true][data-placeholder]:empty::before{
+  &[contentEditable=true][data-placeholder]::before{
+    position: absolute;
     content: attr(data-placeholder);
     color: #707684;
     font-weight: normal;
+    opacity: 0;
+  }
+
+  &[contentEditable=true][data-placeholder]:empty {
+    &::before {
+       opacity: 1;
+    }
+
+    &:focus::before {
+      opacity: 0;
+    }
   }
 
   &[contentEditable=true][data-placeholder]:empty:focus::before {
