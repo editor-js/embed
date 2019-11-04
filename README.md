@@ -29,7 +29,7 @@ const Embed = require('@editorjs/embed');
 ### Load from CDN
 You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/embed).
 
-`https://cdn.jsdelivr.net/npm/@editorjs/embed@2.0.0`
+`https://cdn.jsdelivr.net/npm/@editorjs/embed@latest`
 
 Then require this script on page with Editor.js.
 
