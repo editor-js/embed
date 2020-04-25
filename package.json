@@ -1,6 +1,6 @@
 {
   "name": "@editorjs/embed",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "keywords": [
     "codex editor",
     "embed",
@@ -18,8 +18,8 @@
     "test": "mocha -r @babel/register -r ignore-styles --recursive ./test"
   },
   "author": {
-    "name": "CodeX Team",
-    "email": "team@ifmo.su"
+    "name": "CodeX",
+    "email": "team@codex.so"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

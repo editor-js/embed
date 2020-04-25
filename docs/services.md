@@ -9,3 +9,5 @@
 - [Vine](https://vine.co) - `vine` key. Service is in archive state now
 - [Yandex.Music](https://music.yandex.ru) - `yandex-music-track` key for tracks, `yandex-music-album` for albums and `yandex-music-playlist` for playlists
 - [YouTube](https://youtube.com) - `youtube` key
+- [Twitter](https://twitter.com/codex_team) - `twitter` key. (https://twitframe.com used for render)
+- [Instagram](https://www.instagram.com/codex_team/) - `instagram` key

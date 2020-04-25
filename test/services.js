@@ -243,6 +243,52 @@ describe('Services Regexps', () => {
     });
   });
 
+  it('Twitter', async () => {
+    const service = 'twitter';
+
+    const urls = [
+      {
+        source: 'https://twitter.com/codex_team/status/1202295536826630145',
+        embed: 'https://twitframe.com/show?url=https://twitter.com/codex_team/status/1202295536826630145'
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
+
+  it('Instagram', async () => {
+    const service = 'instagram';
+
+    const urls = [
+      {
+        source: 'https://www.instagram.com/p/B--iRCFHVxI/',
+        embed: 'https://www.instagram.com/p/B--iRCFHVxI/embed'
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
+
   it('Patterns', async () => {
     const services = {
       youtube: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
