@@ -53,6 +53,10 @@
     text-overflow: ellipsis;
   }
 
+  &__content {
+    width: 100%;
+  }
+
   &__caption {
     margin-top: 7px;
 
