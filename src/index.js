@@ -1,9 +1,9 @@
 import SERVICES from './services';
 import './index.css';
-import {debounce} from 'debounce';
+import { debounce } from 'debounce';
 
 /**
- * @typedef {Object} EmbedData
+ * @typedef {object} EmbedData
  * @description Embed Tool data
  * @property {string} service - service name
  * @property {string} url - source URL of embedded content
@@ -11,31 +11,27 @@ import {debounce} from 'debounce';
  * @property {number} [width] - embedded content width
  * @property {number} [height] - embedded content height
  * @property {string} [caption] - content caption
- *
- * @typedef {Object} Service
+ * @typedef {object} Service
  * @description Service configuration object
  * @property {RegExp} regex - pattern of source URLs
  * @property {string} embedUrl - URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id
  * @property {string} html - iframe which contains embedded content
- * @property {number} [height] - iframe height
- * @property {number} [width] - iframe width
  * @property {Function} [id] - function to get resource id from RegExp groups
- *
- * @typedef {Object} EmbedConfig
+ * @typedef {object} EmbedConfig
  * @description Embed tool configuration object
- * @property {Object} [services] - additional services provided by user. Each property should contain Service object
+ * @property {object} [services] - additional services provided by user. Each property should contain Service object
  */
 
 /**
  * @class Embed
  * @classdesc Embed Tool for Editor.js 2.0
  *
- * @property {Object} api - Editor.js API
+ * @property {object} api - Editor.js API
  * @property {EmbedData} _data - private property with Embed data
  * @property {HTMLElement} element - embedded content container
  *
- * @property {Object} services - static property with available services
- * @property {Object} patterns - static property with patterns for paste handling configuration
+ * @property {object} services - static property with available services
+ * @property {object} patterns - static property with patterns for paste handling configuration
  */
 export default class Embed {
   /**
@@ -43,11 +39,13 @@ export default class Embed {
    *   data — previously saved data
    *   config - user config for Tool
    *   api - Editor.js API
+   *   readOnly - read-only mode flag
    */
-  constructor({data, api}) {
+  constructor({ data, api, readOnly }) {
     this.api = api;
     this._data = {};
     this.element = null;
+    this.readOnly = readOnly;
 
     this.data = data;
   }
@@ -66,7 +64,7 @@ export default class Embed {
       throw Error('Embed Tool data should be object');
     }
 
-    const {service, source, embed, width, height, caption = ''} = data;
+    const { service, source, embed, width, height, caption = '' } = data;
 
     this._data = {
       service: service || this.data.service,
@@ -85,7 +83,7 @@ export default class Embed {
   }
 
   /**
-   * @return {EmbedData}
+   * @returns {EmbedData}
    */
   get data() {
     if (this.element) {
@@ -99,7 +97,8 @@ export default class Embed {
 
   /**
    * Get plugin styles
-   * @return {Object}
+   *
+   * @returns {object}
    */
   get CSS() {
     return {
@@ -110,14 +109,14 @@ export default class Embed {
       preloader: 'embed-tool__preloader',
       caption: 'embed-tool__caption',
       url: 'embed-tool__url',
-      content: 'embed-tool__content'
+      content: 'embed-tool__content',
     };
   }
 
   /**
    * Render Embed tool content
    *
-   * @return {HTMLElement}
+   * @returns {HTMLElement}
    */
   render() {
     if (!this.data.service) {
@@ -128,7 +127,7 @@ export default class Embed {
       return container;
     }
 
-    const {html} = Embed.services[this.data.service];
+    const { html } = Embed.services[this.data.service];
     const container = document.createElement('div');
     const caption = document.createElement('div');
     const template = document.createElement('template');
@@ -164,7 +163,8 @@ export default class Embed {
 
   /**
    * Creates preloader to append to container while data is loading
-   * @return {HTMLElement} preloader
+   *
+   * @returns {HTMLElement} preloader
    */
   createPreloader() {
     const preloader = document.createElement('preloader');
@@ -183,7 +183,7 @@ export default class Embed {
   /**
    * Save current content and return EmbedData object
    *
-   * @return {EmbedData}
+   * @returns {EmbedData}
    */
   save() {
     return this.data;
@@ -192,13 +192,14 @@ export default class Embed {
   /**
    * Handle pasted url and return Service object
    *
+   * @param event
    * @param {PasteEvent} event- event with pasted data
-   * @return {Service}
+   * @returns {Service}
    */
   onPaste(event) {
-    const {key: service, data: url} = event.detail;
+    const { key: service, data: url } = event.detail;
 
-    const {regex, embedUrl, width, height, id = (ids) => ids.shift()} = Embed.services[service];
+    const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
     const result = regex.exec(url).slice(1);
     const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
 
@@ -207,7 +208,7 @@ export default class Embed {
       source: url,
       embed,
       width,
-      height
+      height,
     };
   }
 
@@ -216,8 +217,8 @@ export default class Embed {
    *
    * @param {EmbedConfig} config
    */
-  static prepare({config = {}}) {
-    let {services = {}} = config;
+  static prepare({ config = {} }) {
+    const { services = {} } = config;
 
     let entries = Object.entries(SERVICES);
 
@@ -235,7 +236,7 @@ export default class Embed {
       })
       .filter(([key, service]) => Embed.checkServiceConfig(service))
       .map(([key, service]) => {
-        const {regex, embedUrl, html, height, width, id} = service;
+        const { regex, embedUrl, html, height, width, id } = service;
 
         return [key, {
           regex,
@@ -243,7 +244,7 @@ export default class Embed {
           html,
           height,
           width,
-          id
+          id,
         } ];
       });
 
@@ -256,10 +257,12 @@ export default class Embed {
     Embed.services = entries.reduce((result, [key, service]) => {
       if (!(key in result)) {
         result[key] = service;
+
         return result;
       }
 
       result[key] = Object.assign({}, result[key], service);
+
       return result;
     }, {});
 
@@ -275,14 +278,14 @@ export default class Embed {
    * Check if Service config is valid
    *
    * @param {Service} config
-   * @return {boolean}
+   * @returns {boolean}
    */
   static checkServiceConfig(config) {
-    const {regex, embedUrl, html, height, width, id} = config;
+    const { regex, embedUrl, html, height, width, id } = config;
 
-    let isValid = regex && regex instanceof RegExp
-      && embedUrl && typeof embedUrl === 'string'
-      && html && typeof html === 'string';
+    let isValid = regex && regex instanceof RegExp &&
+      embedUrl && typeof embedUrl === 'string' &&
+      html && typeof html === 'string';
 
     isValid = isValid && (id !== undefined ? id instanceof Function : true);
     isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
@@ -296,14 +299,24 @@ export default class Embed {
    */
   static get pasteConfig() {
     return {
-      patterns: Embed.patterns
+      patterns: Embed.patterns,
     };
   }
 
   /**
+   * Notify core that read-only mode is supported
+   *
+   * @returns {boolean}
+   */
+  static get isReadOnlySupported() {
+    return true;
+  }
+
+  /**
    * Checks that mutations in DOM have finished after appending iframe content
+   *
    * @param {HTMLElement} targetNode - HTML-element mutations of which to listen
-   * @return {Promise<any>} - result that all mutations have finished
+   * @returns {Promise<any>} - result that all mutations have finished
    */
   embedIsReady(targetNode) {
     const PRELOADER_DELAY = 450;
@@ -312,7 +325,10 @@ export default class Embed {
 
     return new Promise((resolve, reject) => {
       observer = new MutationObserver(debounce(resolve, PRELOADER_DELAY));
-      observer.observe(targetNode, {childList: true, subtree: true});
+      observer.observe(targetNode, {
+        childList: true,
+        subtree: true,
+      });
     }).then(() => {
       observer.disconnect();
     });
