@@ -164,7 +164,7 @@ export default class Embed {
   /**
    * Creates preloader to append to container while data is loading
    *
-   * @returns {HTMLElement} preloader
+   * @returns {HTMLElement}
    */
   createPreloader() {
     const preloader = document.createElement('preloader');
@@ -192,7 +192,6 @@ export default class Embed {
   /**
    * Handle pasted url and return Service object
    *
-   * @param event
    * @param {PasteEvent} event- event with pasted data
    * @returns {Service}
    */
