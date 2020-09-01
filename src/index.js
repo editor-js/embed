@@ -284,9 +284,14 @@ export default class Embed {
       && embedUrl && typeof embedUrl === 'string'
       && html && typeof html === 'string';
 
+     //improves Number.isFinite(dim) with units support
+    function  isValidDim(dim) {
+        return (/^(\d+)(px|em|pc|%)?$/.test(dim)); 
+    }
+      
     isValid = isValid && (id !== undefined ? id instanceof Function : true);
-    isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
-    isValid = isValid && (width !== undefined ? Number.isFinite(width) : true);
+    isValid = isValid && (height !== undefined ? isValidDim(height) : true);
+    isValid = isValid && (width !== undefined ? isValidDim(width) : true);
 
     return isValid;
   }
