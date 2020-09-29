@@ -11,12 +11,16 @@ import { debounce } from 'debounce';
  * @property {number} [width] - embedded content width
  * @property {number} [height] - embedded content height
  * @property {string} [caption] - content caption
+*/
+/**
  * @typedef {object} Service
  * @description Service configuration object
  * @property {RegExp} regex - pattern of source URLs
  * @property {string} embedUrl - URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id
  * @property {string} html - iframe which contains embedded content
  * @property {Function} [id] - function to get resource id from RegExp groups
+*/
+/**
  * @typedef {object} EmbedConfig
  * @description Embed tool configuration object
  * @property {object} [services] - additional services provided by user. Each property should contain Service object
