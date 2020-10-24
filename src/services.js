@@ -141,8 +141,8 @@ export default {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
     embedUrl: 'https://assets.pinterest.com/ext/embed.html?id=<%= remote_id %>',
     html: "<iframe scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%; min-height: 400px; max-height: 1000px;'></iframe>",
-    id: (e) => {
-        return e[1];
+    id: (ids) => {
+        return ids[1];
     }
   },
   facebook: {
