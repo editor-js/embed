@@ -74,7 +74,7 @@ module.exports = (env, argv) => {
         path: __dirname + '/dist',
         publicPath: '/',
         filename: 'bundle.js',
-        library: 'EmbedTool',
+        library: 'Embed',
         libraryTarget: 'umd'
     }
   };
