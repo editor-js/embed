@@ -67,7 +67,7 @@ module.exports = (env, argv) => {
       }),
 
       new webpack.BannerPlugin({
-        banner: `Embed tool\n\n@version ${VERSION}\n\n@package https://github.com/editor-js/quote\n@licence MIT\n@author CodeX <https://codex.so>`,
+        banner: `Embed tool\n\n@version ${VERSION}\n\n@package https://github.com/editor-js/embed\n@licence MIT\n@author CodeX <https://codex.so>`,
       }),
      ],
     output: {
