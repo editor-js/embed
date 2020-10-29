@@ -75,7 +75,8 @@ module.exports = (env, argv) => {
         publicPath: '/',
         filename: 'bundle.js',
         library: 'Embed',
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        libraryExport: 'default' // BEWARE this line was ommitted by me and create me no output,no error https://github.com/webpack/webpack/issues/3929
     }
   };
 };
