@@ -65,7 +65,7 @@ export default {
   },
   imgur: {
     regex: /https?:\/\/(?:i\.)?imgur\.com.*\/([a-zA-Z0-9]+)(?:\.gifv)?/,
-    embedUrl: 'http://imgur.com/<%= remote_id %>/embed',
+    embedUrl: 'http://imgur.com/a/<%= remote_id %>/embed?pub=true',
     html: '<iframe allowfullscreen="true" scrolling="no" id="imgur-embed-iframe-pub-<%= remote_id %>" class="imgur-embed-iframe-pub" style="height: 500px; width: 100%; border: 1px solid #000"></iframe>',
     height: 500,
     width: 540,
