@@ -115,7 +115,7 @@ export default {
     id: (ids) => ids.join('/'),
   },
   codepen: {
-    regex: /https?:\/\/codepen\.io\/([^\/\?\&]*)\/pen\/([^\/\?\&]*)/,
+    regex: /https?:\/\/codepen\.io\/([^\/\?\&]*)\/(?:pen|details|full|embed)\/([^\/\?\&]*)(?:.*)/,
     embedUrl: 'https://codepen.io/<%= remote_id %>?height=300&theme-id=0&default-tab=css,result&embed-version=2',
     html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
     height: 300,
