@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 export default {
   vimeo: {
-    regex: /(?:http[s]?:\/\/)?(?:(www|player).)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
+    regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
     html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
     height: 320,
