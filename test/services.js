@@ -42,7 +42,8 @@ describe('Services Regexps', () => {
 
     const urls = [
       {source: 'https://vimeo.com/289836809', embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0'},
-      {source: 'https://vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0'}
+      {source: 'https://www.vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0'},
+      {source: 'https://player.vimeo.com/video/504749530', embed: 'https://player.vimeo.com/video/504749530?title=0&byline=0'}
     ];
 
     urls.forEach(url => {
@@ -289,6 +290,7 @@ describe('Services Regexps', () => {
     });
   });
 
+
   it('Patterns', async () => {
     const services = {
       youtube: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
@@ -314,4 +316,56 @@ describe('Services Regexps', () => {
         expect(foundService[0]).to.be.equal(name);
       });
   });
+
+
+  it('Pinterest', async () => {
+    const service = 'pinterest';
+
+    const urls = [
+      {
+        source: 'https://tr.pinterest.com/pin/409757266103637553/',
+        embed: 'https://assets.pinterest.com/ext/embed.html?id=409757266103637553'
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
+
+  it('Facebook', async () => {
+    const service = 'facebook';
+
+    const urls = [
+      {
+        source: 'https://www.facebook.com/genclikforeverresmi/videos/944647522284479',
+        embed: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/genclikforeverresmi/videos/944647522284479&width=500'
+      },
+      {
+        source:'https://www.facebook.com/0devco/posts/497515624410920',
+        embed: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/0devco/posts/497515624410920&width=500'
+      }
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
+
 });
