@@ -1,10 +1,10 @@
-import {expect} from 'chai';
+import { expect } from 'chai';
 
 import EmbedTool from '../src/index';
 
 EmbedTool.prepare({});
-const {patterns} = EmbedTool.pasteConfig;
-const embed = new EmbedTool({data: {}});
+const { patterns } = EmbedTool.pasteConfig;
+const embed = new EmbedTool({ data: {} });
 
 const composePasteEventMock = (type, service, url) => ({
   type,
@@ -19,9 +19,9 @@ describe('Services Regexps', () => {
     const service = 'youtube';
 
     const urls = [
-      {source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120'},
-      {source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN'},
-      {source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173'}
+      { source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120' },
+      { source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN' },
+      { source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173' }
     ];
 
     urls.forEach(url => {
@@ -41,9 +41,9 @@ describe('Services Regexps', () => {
     const service = 'vimeo';
 
     const urls = [
-      {source: 'https://vimeo.com/289836809', embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0'},
-      {source: 'https://www.vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0'},
-      {source: 'https://player.vimeo.com/video/504749530', embed: 'https://player.vimeo.com/video/504749530?title=0&byline=0'}
+      { source: 'https://vimeo.com/289836809', embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0' },
+      { source: 'https://www.vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0' },
+      { source: 'https://player.vimeo.com/video/504749530', embed: 'https://player.vimeo.com/video/504749530?title=0&byline=0' }
     ];
 
     urls.forEach(url => {
@@ -63,8 +63,8 @@ describe('Services Regexps', () => {
     const service = 'coub';
 
     const urls = [
-      {source: 'https://coub.com/view/1efrxs', embed: 'https://coub.com/embed/1efrxs'},
-      {source: 'https://coub.com/view/1c6nrr', embed: 'https://coub.com/embed/1c6nrr'}
+      { source: 'https://coub.com/view/1efrxs', embed: 'https://coub.com/embed/1efrxs' },
+      { source: 'https://coub.com/view/1c6nrr', embed: 'https://coub.com/embed/1c6nrr' }
     ];
 
     urls.forEach(url => {
@@ -83,8 +83,8 @@ describe('Services Regexps', () => {
     const service = 'imgur';
 
     const urls = [
-      {source: 'https://imgur.com/gallery/OHbkxgr', embed: 'http://imgur.com/OHbkxgr/embed'},
-      {source: 'https://imgur.com/gallery/TqIWG12', embed: 'http://imgur.com/TqIWG12/embed'}
+      { source: 'https://imgur.com/gallery/OHbkxgr', embed: 'http://imgur.com/OHbkxgr/embed' },
+      { source: 'https://imgur.com/gallery/TqIWG12', embed: 'http://imgur.com/TqIWG12/embed' }
     ];
 
     urls.forEach(url => {
@@ -104,8 +104,8 @@ describe('Services Regexps', () => {
     const service = 'gfycat';
 
     const urls = [
-      {source: 'https://gfycat.com/EsteemedMarvelousHagfish', embed: 'https://gfycat.com/ifr/EsteemedMarvelousHagfish'},
-      {source: 'https://gfycat.com/OddCornyLeech', embed: 'https://gfycat.com/ifr/OddCornyLeech'}
+      { source: 'https://gfycat.com/EsteemedMarvelousHagfish', embed: 'https://gfycat.com/ifr/EsteemedMarvelousHagfish' },
+      { source: 'https://gfycat.com/OddCornyLeech', embed: 'https://gfycat.com/ifr/OddCornyLeech' }
     ];
 
     urls.forEach(url => {
@@ -124,8 +124,8 @@ describe('Services Regexps', () => {
     const service = 'twitch-channel';
 
     const urls = [
-      {source: 'https://www.twitch.tv/ninja', embed: 'https://player.twitch.tv/?channel=ninja'},
-      {source: 'https://www.twitch.tv/gohamedia', embed: 'https://player.twitch.tv/?channel=gohamedia'}
+      { source: 'https://www.twitch.tv/ninja', embed: 'https://player.twitch.tv/?channel=ninja' },
+      { source: 'https://www.twitch.tv/gohamedia', embed: 'https://player.twitch.tv/?channel=gohamedia' }
     ];
 
     urls.forEach(url => {
@@ -144,8 +144,8 @@ describe('Services Regexps', () => {
     const service = 'twitch-video';
 
     const urls = [
-      {source: 'https://www.twitch.tv/videos/315468440', embed: 'https://player.twitch.tv/?video=v315468440'},
-      {source: 'https://www.twitch.tv/videos/314691366', embed: 'https://player.twitch.tv/?video=v314691366'}
+      { source: 'https://www.twitch.tv/videos/315468440', embed: 'https://player.twitch.tv/?video=v315468440' },
+      { source: 'https://www.twitch.tv/videos/314691366', embed: 'https://player.twitch.tv/?video=v314691366' }
     ];
 
     urls.forEach(url => {
@@ -165,8 +165,8 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-album';
 
     const urls = [
-      {source: 'https://music.yandex.ru/album/5643859', embed: 'https://music.yandex.ru/iframe/#album/5643859/'},
-      {source: 'https://music.yandex.ru/album/5393158', embed: 'https://music.yandex.ru/iframe/#album/5393158/'}
+      { source: 'https://music.yandex.ru/album/5643859', embed: 'https://music.yandex.ru/iframe/#album/5643859/' },
+      { source: 'https://music.yandex.ru/album/5393158', embed: 'https://music.yandex.ru/iframe/#album/5393158/' }
     ];
 
     urls.forEach(url => {
@@ -186,8 +186,8 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-track';
 
     const urls = [
-      {source: 'https://music.yandex.ru/album/5643859/track/42662275', embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/'},
-      {source: 'https://music.yandex.ru/album/5393158/track/41249158', embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/'}
+      { source: 'https://music.yandex.ru/album/5643859/track/42662275', embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/' },
+      { source: 'https://music.yandex.ru/album/5393158/track/41249158', embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/' }
     ];
 
     urls.forEach(url => {
@@ -207,8 +207,8 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-playlist';
 
     const urls = [
-      {source: 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/'},
-      {source: 'https://music.yandex.ru/users/yamusic-personal/playlists/27924603', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/'}
+      { source: 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/' },
+      { source: 'https://music.yandex.ru/users/yamusic-personal/playlists/27924603', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/' }
     ];
 
     urls.forEach(url => {
@@ -227,8 +227,8 @@ describe('Services Regexps', () => {
     const service = 'codepen';
 
     const urls = [
-      {source: 'https://codepen.io/Rikkokiri/pen/RYBrwG', embed: 'https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2'},
-      {source: 'https://codepen.io/geoffgraham/pen/bxEVEN', embed: 'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2'}
+      { source: 'https://codepen.io/Rikkokiri/pen/RYBrwG', embed: 'https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2' },
+      { source: 'https://codepen.io/geoffgraham/pen/bxEVEN', embed: 'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2' }
     ];
 
     urls.forEach(url => {
@@ -289,7 +289,28 @@ describe('Services Regexps', () => {
       expect(embed.data.source).to.be.equal(url.source);
     });
   });
+  it('Aparat', async () => {
+    const service = 'aparat';
 
+    const urls = [
+      {
+        source: 'https://www.aparat.com/v/tDZe5',
+        embed: 'https://www.aparat.com/video/video/embed/videohash/tDZe5/vt/frame'
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
   it('Patterns', async () => {
     const services = {
       youtube: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY',
