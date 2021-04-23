@@ -137,4 +137,11 @@ export default {
     width: 600,
     id: ids => ids.join('/status/'),
   },
+  aparat: {
+    regex: /(?:http[s]?:\/\/)?(?:www.)?aparat\.com\/v\/([^\/\?\&]+)\/?/,
+    embedUrl: 'https://www.aparat.com/video/video/embed/videohash/<%= remote_id %>/vt/frame',
+    html: '<iframe width="600" height="300" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+    height: 300,
+    width: 600,
+  },
 };
