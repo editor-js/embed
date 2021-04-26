@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 export default {
   vimeo: {
-    regex: /(?:http[s]?:\/\/)?(?:www.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
+    regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
     html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
     height: 320,
@@ -136,5 +136,28 @@ export default {
     height: 300,
     width: 600,
     id: ids => ids.join('/status/'),
+  },
+  pinterest: {
+    regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
+    embedUrl: 'https://assets.pinterest.com/ext/embed.html?id=<%= remote_id %>',
+    html: "<iframe scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%; min-height: 400px; max-height: 1000px;'></iframe>",
+    id: (ids) => {
+        return ids[1];
+    }
+  },
+  facebook: {
+     regex: /https?:\/\/www.facebook.com\/([^\/\?\&]*)\/(.*)/,
+     embedUrl: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/<%= remote_id %>&width=500',
+     html: "<iframe scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%; min-height: 500px; max-height: 1000px;'></iframe>",
+     id: (ids) => {
+         return ids.join('/');
+    }
+  },
+  aparat: {
+    regex: /(?:http[s]?:\/\/)?(?:www.)?aparat\.com\/v\/([^\/\?\&]+)\/?/,
+    embedUrl: 'https://www.aparat.com/video/video/embed/videohash/<%= remote_id %>/vt/frame',
+    html: '<iframe width="600" height="300" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
+    height: 300,
+    width: 600,
   },
 };
