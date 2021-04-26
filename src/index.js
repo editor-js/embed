@@ -13,6 +13,8 @@ import { debounce } from 'debounce';
  * @property {string} [caption] - content caption
  */
 /**
+ * @typedef {object} PasteEvent
+ * @typedef {object} HTMLElement
  * @typedef {object} Service
  * @description Service configuration object
  * @property {RegExp} regex - pattern of source URLs
