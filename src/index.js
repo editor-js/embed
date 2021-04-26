@@ -55,7 +55,7 @@ export default class Embed {
   }
 
   /**
-   * @param {EmbedData} data
+   * @param {EmbedData} data - embed data
    * @param {RegExp} [data.regex] - pattern of source URLs
    * @param {string} [data.embedUrl] - URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id
    * @param {string} [data.html] - iframe which contains embedded content
@@ -196,9 +196,7 @@ export default class Embed {
   /**
    * Handle pasted url and return Service object
    *
-   * @param {PasteEvent} event- event with pasted data
-   * @param event
-   * @returns {Service}
+   * @param {PasteEvent} event - event with pasted data
    */
   onPaste(event) {
     const { key: service, data: url } = event.detail;
@@ -219,7 +217,7 @@ export default class Embed {
   /**
    * Analyze provided config and make object with services to use
    *
-   * @param {EmbedConfig} config
+   * @param {EmbedConfig} config - configuration of embed block element
    */
   static prepare({ config = {} }) {
     const { services = {} } = config;
@@ -281,7 +279,7 @@ export default class Embed {
   /**
    * Check if Service config is valid
    *
-   * @param {Service} config
+   * @param {Service} config - configuration of embed block element
    * @returns {boolean}
    */
   static checkServiceConfig(config) {
@@ -300,6 +298,8 @@ export default class Embed {
 
   /**
    * Paste configuration to enable pasted URLs processing by Editor
+   *
+   * @returns {object} - object of patterns which contain regx for pasteConfig
    */
   static get pasteConfig() {
     return {
