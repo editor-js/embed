@@ -205,7 +205,7 @@ export default class Embed {
 
     const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
     const result = regex.exec(url).slice(1);
-    const embed = embedUrl.replace(/<\%\= remote\_id \%\>/g, id(result));
+    const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
 
     this.data = {
       service,

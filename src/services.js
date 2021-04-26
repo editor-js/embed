@@ -34,11 +34,12 @@ export default {
 
           if (!id && name === 'v') {
             id = value;
-            return;
+
+            return null;
           }
 
           if (!paramsMap[name]) {
-            return;
+            return null;
           }
 
           return `${paramsMap[name]}=${value}`;
