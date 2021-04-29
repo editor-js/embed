@@ -1,6 +1,6 @@
 {
   "name": "@editorjs/embed",
-  "version": "2.4.5",
+  "version": "2.4.6",
   "keywords": [
     "codex editor",
     "embed",
@@ -15,7 +15,10 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development --watch",
-    "test": "mocha -r @babel/register -r ignore-styles --recursive ./test"
+    "test": "mocha -r @babel/register -r ignore-styles --recursive ./test",
+    "lint": "eslint src/ --ext .js",
+    "lint:errors": "eslint src/ --ext .js --quiet",
+    "lint:fix": "eslint src/ --ext .js --fix"
   },
   "author": {
     "name": "CodeX",
@@ -31,6 +34,8 @@
     "chai": "^4.2.0",
     "css-loader": "^3.5.3",
     "debounce": "^1.2.0",
+    "eslint": "^7.25.0",
+    "eslint-config-codex": "^1.6.1",
     "ignore-styles": "^5.0.1",
     "mocha": "^7.1.1",
     "postcss-loader": "^3.0.0",
