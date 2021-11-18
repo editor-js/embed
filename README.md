@@ -7,6 +7,8 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 
 ## List of services supported
 
+> `service` — is a service name that will be saved to Tool's [output JSON](#output-data)
+
 - [Facebook](https://www.facebook.com) - `facebook` service
 - [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
 - [YouTube](https://youtube.com) - `youtube` service
@@ -24,7 +26,7 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 - [Pinterest](https://www.pinterest.com) - `pinterest` service
 - 👇 Any other [customized service](#add-more-services)
 
-`service` — is a service name that will be saved to Tool's [output JSON](#output-data)
+
 
 ## Installation
 
