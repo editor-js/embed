@@ -389,3 +389,18 @@ describe('Services Regexps', () => {
   });
 
 });
+
+describe('Miro service', () => {
+  it('should correctly parse URL got from a browser', () => {
+    const regularBoardUrl = 'https://miro.com/app/board/10J_kw57KxQ=/';
+    const event = composePasteEventMock('pattern', 'miro', regularBoardUrl);
+
+    embed.onPaste(event);
+
+    expect(patterns.miro.test(regularBoardUrl)).to.be.true;
+    expect(embed.data.service).to.be.equal('miro');
+    expect(embed.data.embed).to.be.equal('https://miro.com/app/live-embed/10J_kw57KxQ=');
+    expect(embed.data.source).to.be.equal(regularBoardUrl);
+  })
+});
+
