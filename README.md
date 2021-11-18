@@ -7,21 +7,21 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 
 ## List of services supported
 
-- [CodePen](https://codepen.io) — `codepen` service
-- [Coub](https://coub.com) — `coub` service
-- [Imgur](https://imgur.com) — `imgur` service
-- [Gfycat](https://gfycat.com) — `gfycat` service
-- [Twitch](https://twitch.tv) - `twitch-video` service for videos and `twitch-channel` for channels
-- [Vimeo](https://vimeo.com) — `vimeo` service
-- [Vine](https://vine.co) - `vine` service. The project is in archive state now
-- [Yandex.Music](https://music.yandex.ru) - `yandex-music-track` service for tracks, `yandex-music-album` for albums and `yandex-music-playlist` for playlists
+- [Facebook](https://www.facebook.com) - `facebook` service
+- [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
 - [YouTube](https://youtube.com) - `youtube` service
 - [Twitter](https://twitter.com/codex_team) - `twitter` service. (https://twitframe.com used for render)
-- [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
-- [Aparat](https://www.aparat.com) - `aparat` service
-- [Facebook](https://www.facebook.com) - `facebook` service
-- [Pinterest](https://www.pinterest.com) - `pinterest` service
+- [Twitch](https://twitch.tv) - `twitch-video` service for videos and `twitch-channel` for channels
 - [Miro](https://miro.com) - `miro` service
+- [Vimeo](https://vimeo.com) — `vimeo` service
+- [Gfycat](https://gfycat.com) — `gfycat` service
+- [Imgur](https://imgur.com) — `imgur` service
+- [Vine](https://vine.co) - `vine` service. The project is in archive state now
+- [Aparat](https://www.aparat.com) - `aparat` service
+- [Yandex.Music](https://music.yandex.ru) - `yandex-music-track` service for tracks, `yandex-music-album` for albums and `yandex-music-playlist` for playlists
+- [Coub](https://coub.com) — `coub` service
+- [CodePen](https://codepen.io) — `codepen` service
+- [Pinterest](https://www.pinterest.com) - `pinterest` service
 - 👇 Any other [customized service](#add-more-services)
 
 `service` — is a service name that will be saved to Tool's [output JSON](#output-data)
