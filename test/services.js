@@ -252,6 +252,10 @@ describe('Services Regexps', () => {
         source: 'https://twitter.com/codex_team/status/1202295536826630145',
         embed: 'https://twitframe.com/show?url=https://twitter.com/codex_team/status/1202295536826630145'
       },
+      {
+        source: 'https://twitter.com/codex_team/status/1202295536826630145?s=20&t=wrY8ei5GBjbbmNonrEm2kQ',
+        embed: 'https://twitframe.com/show?url=https://twitter.com/codex_team/status/1202295536826630145?s=20&t=wrY8ei5GBjbbmNonrEm2kQ'
+      },
     ];
 
     urls.forEach(url => {
