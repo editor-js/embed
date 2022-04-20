@@ -8,7 +8,7 @@ export default {
     width: 580,
   },
   youtube: {
-    regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=\w*)*)/,
+    regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=[\wÀ-ÖØ-öø-ÿ%]*)*)/,
     embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
     html: '<iframe style="width:100%;" height="320" frameborder="0" allowfullscreen></iframe>',
     height: 320,
@@ -164,5 +164,5 @@ export default {
     regex: /https:\/\/miro.com\/\S+(\S{12})\/(\S+)?/,
     embedUrl: 'https://miro.com/app/live-embed/<%= remote_id %>',
     html: '<iframe width="700" height="500" style="margin: 0 auto;" allowFullScreen frameBorder="0" scrolling="no"></iframe>',
-  }
+  },
 };

@@ -21,7 +21,9 @@ describe('Services Regexps', () => {
     const urls = [
       { source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120' },
       { source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN' },
-      { source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173' }
+      { source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173' },
+      { source: 'https://www.youtube.com/watch?v=cVu8klm6ygI&ab_channel=HöRBERLIN', embed: 'https://www.youtube.com/embed/cVu8klm6ygI?' },
+      { source: 'https://www.youtube.com/watch?v=cVu8klm6ygI&ab_channel=H%C3%B6RBERLIN', embed:'https://www.youtube.com/embed/cVu8klm6ygI?' }
     ];
 
     urls.forEach(url => {
