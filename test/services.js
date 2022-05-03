@@ -418,7 +418,6 @@ describe('Services Regexps', () => {
       expect(embed.data.source).to.be.equal(url.source);
     });
   });
-
 });
 
 describe('Miro service', () => {

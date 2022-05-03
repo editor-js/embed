@@ -171,6 +171,6 @@ export default {
     html: '<iframe width="100%" height="350" src=""></iframe>',
     height: 300,
     width: 600,
-    id: (groups) => groups.join('/')
-  }
+    id: (groups) => groups.join('/'),
+  },
 };
