@@ -392,6 +392,32 @@ describe('Services Regexps', () => {
     });
   });
 
+  it('Github', async () => {
+    const service = 'github';
+
+    const urls = [
+      {
+        source: 'https://gist.github.com/userharis/091b56505c804276e1f91925976f11db',
+        embed: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/091b56505c804276e1f91925976f11db.js" ></script></body>',
+      },
+      {
+        source: 'https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306',
+        embed: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306.js" ></script></body>',
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
 });
 
 describe('Miro service', () => {

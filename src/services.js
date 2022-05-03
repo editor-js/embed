@@ -167,10 +167,10 @@ export default {
   },
   github: {
     regex: /https?:\/\/gist.github.com\/([^\/\?\&]*)\/([^\/\?\&]*)/,
-    embedUrl: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src=https://gist.github.com/<%= remote_id %> ></script></body>',
+    embedUrl: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/<%= remote_id %>" ></script></body>',
     html: '<iframe width="100%" height="350" src=""></iframe>',
     height: 300,
     width: 600,
-    id: (groups) => groups.join('/')
-  }
+    id: (groups) => `${groups.join('/')}.js`,
+  },
 };
