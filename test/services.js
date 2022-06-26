@@ -279,6 +279,10 @@ describe('Services Regexps', () => {
         source: 'https://www.instagram.com/p/B--iRCFHVxI/',
         embed: 'https://www.instagram.com/p/B--iRCFHVxI/embed'
       },
+      {
+        source: 'https://www.instagram.com/p/CfQzzGNphD8/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/CfQzzGNphD8/embed'
+      },
     ];
 
     urls.forEach(url => {

@@ -123,7 +123,7 @@ export default {
     id: (ids) => ids.join('/embed/'),
   },
   instagram: {
-    regex: /https?:\/\/www\.instagram\.com\/p\/([^\/\?\&]+)\/?/,
+    regex: /https?:\/\/www\.instagram\.com\/p\/([^\/\?\&]+)\/?.*/,
     embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 505,
