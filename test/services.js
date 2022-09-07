@@ -22,7 +22,7 @@ describe('Services Regexps', () => {
       { source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120' },
       { source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN' },
       { source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173' },
-      { source: 'https://www.youtube.com/watch?v=efBBjIK3b8I&list=LL&t=1337s', embed: 'https://www.youtube.com/embed/efBBjIK3b8I?start=1337' },
+      { source: 'https://www.youtube.com/watch?v=efBBjIK3b8I&list=LL&t=1337', embed: 'https://www.youtube.com/embed/efBBjIK3b8I?start=1337' },
       { source: 'https://www.youtube.com/watch?v=yQUeAin7fII&list=RDMMnMXCzscqi_M', embed: 'https://www.youtube.com/embed/yQUeAin7fII?' },
       { source: 'https://www.youtube.com/watch?v=3kw2sttGXMI&list=FLgc4xqIMDoiP4KOTFS21TJA', embed: 'https://www.youtube.com/embed/3kw2sttGXMI?' },
     ];
