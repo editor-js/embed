@@ -42,6 +42,12 @@ export default {
             return null;
           }
 
+          if (value === 'LL' 
+            || value.startsWith('RDMM')
+            || value.startsWith('FL')) {
+            return null;
+          }
+
           return `${paramsMap[name]}=${value}`;
         })
         .filter(param => !!param);
