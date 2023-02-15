@@ -3,7 +3,7 @@ export default {
   vimeo: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
-    html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
+    html: '<iframe style="width:100%;" height="320" frameborder="0" allowfullscreen></iframe>',
     height: 320,
     width: 580,
   },
