@@ -25,6 +25,8 @@ describe('Services Regexps', () => {
       { source: 'https://www.youtube.com/watch?v=efBBjIK3b8I&list=LL&t=1337', embed: 'https://www.youtube.com/embed/efBBjIK3b8I?start=1337' },
       { source: 'https://www.youtube.com/watch?v=yQUeAin7fII&list=RDMMnMXCzscqi_M', embed: 'https://www.youtube.com/embed/yQUeAin7fII?' },
       { source: 'https://www.youtube.com/watch?v=3kw2sttGXMI&list=FLgc4xqIMDoiP4KOTFS21TJA', embed: 'https://www.youtube.com/embed/3kw2sttGXMI?' },
+      { source: 'https://youtube.com/shorts/iMRAY06BJN0', embed: 'https://www.youtube.com/embed/iMRAY06BJN0' },
+      { source: 'https://youtube.com/shorts/iMRAY06BJN0?feature=share', embed: 'https://www.youtube.com/embed/iMRAY06BJN0?' }
     ];
 
     urls.forEach(url => {
