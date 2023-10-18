@@ -170,5 +170,13 @@ export default {
     regex: /https:\/\/miro.com\/\S+(\S{12})\/(\S+)?/,
     embedUrl: 'https://miro.com/app/live-embed/<%= remote_id %>',
     html: '<iframe width="700" height="500" style="margin: 0 auto;" allowFullScreen frameBorder="0" scrolling="no"></iframe>',
-  }
+  },
+  github: {
+    regex: /https?:\/\/gist.github.com\/([^\/\?\&]*)\/([^\/\?\&]*)/,
+    embedUrl: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/<%= remote_id %>" ></script></body>',
+    html: '<iframe width="100%" height="350" frameborder="0" style="margin: 0 auto;"></iframe>',
+    height: 300,
+    width: 600,
+    id: (groups) => `${groups.join('/')}.js`,
+  },
 };
