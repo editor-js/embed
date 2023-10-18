@@ -24,6 +24,7 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 - [Coub](https://coub.com) — `coub` service
 - [CodePen](https://codepen.io) — `codepen` service
 - [Pinterest](https://www.pinterest.com) - `pinterest` service
+- [GitHub Gist](https://gist.github.com) - `github` service
 - 👇 Any other [customized service](#add-more-services)
 
 
