@@ -4,7 +4,6 @@
   "keywords": [
     "codex editor",
     "embed",
-    "tool",
     "editor.js",
     "editorjs"
   ],
@@ -35,7 +34,9 @@
     "email": "team@codex.so"
   },
   "devDependencies": {
-    "@babel/register": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
+    "@babel/register": "^7.22.15",
     "chai": "^4.2.0",
     "debounce": "^1.2.0",
     "eslint": "^7.25.0",
