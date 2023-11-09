@@ -31,8 +31,6 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 
 ## Installation
 
-### Install via NPM
-
 Get the package
 
 ```shell
