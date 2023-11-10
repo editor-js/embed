@@ -31,12 +31,10 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 
 ## Installation
 
-### Install via NPM
-
 Get the package
 
 ```shell
-npm i --save @editorjs/embed
+yarn add @editorjs/embed
 ```
 
 Include module at your application
@@ -45,16 +43,7 @@ Include module at your application
 import Embed from '@editorjs/embed';
 ```
 
-### Load from CDN
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/embed).
-
-`https://cdn.jsdelivr.net/npm/@editorjs/embed@latest`
-
-Then require this script on page with Editor.js.
-
-```html
-<script src="..."></script>
-```
+Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/embed@latest)
 
 ## Usage
 
