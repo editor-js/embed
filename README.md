@@ -34,7 +34,7 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 Get the package
 
 ```shell
-yarn @editorjs/embed
+yarn add @editorjs/embed
 ```
 
 Include module at your application
