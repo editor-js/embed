@@ -185,7 +185,16 @@ export default class Embed {
 
     return preloader;
   }
-
+ /**
+   * Sanitize HTML tags like & to be &amp; 
+   *
+   */
+    static get sanitize(){
+            return {
+                embed:true// disallow HTML
+            }
+        }
+  
   /**
    * Save current content and return EmbedData object
    *
