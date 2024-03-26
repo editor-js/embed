@@ -42,7 +42,7 @@ export default {
             return null;
           }
 
-          if (value === 'LL' 
+          if (value === 'LL'
             || value.startsWith('RDMM')
             || value.startsWith('FL')) {
             return null;
@@ -178,5 +178,20 @@ export default {
     height: 300,
     width: 600,
     id: (groups) => `${groups.join('/')}.js`,
+  },
+  whimsical: {
+    regex: /(https:\/\/)?whimsical.com\/(?:[a-zA-Z0-9\-]+\-)?([a-km-zA-HJ-NP-Z1-9]{16,22})(@[a-km-zA-HJ-NP-Z1-9]+)?/,
+    embedUrl: 'https://whimsical.com/embed/<%= remote_id %>',
+    html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600,
+    id: (ids) => ids[1]
+  },
+  figma:{
+    regex: /(https:\/\/www\.figma\.com\/.*)?/,
+    embedUrl: 'https://www.figma.com/embed?embed_host=share&url=<%= remote_id %>',
+    html: "<iframe height='450' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600
   },
 };
