@@ -42,7 +42,7 @@ export default {
             return null;
           }
 
-          if (value === 'LL' 
+          if (value === 'LL'
             || value.startsWith('RDMM')
             || value.startsWith('FL')) {
             return null;
@@ -178,5 +178,13 @@ export default {
     height: 300,
     width: 600,
     id: (groups) => `${groups.join('/')}.js`,
+  },
+  reddit: {
+    regex: /https:\/\/www\.reddit\.com\/(.*)/,
+    embedUrl: "https://www.redditmedia.com/<%= remote_id %>?ref_source=embed&ref=share&embed=true",
+    html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600,
+    id: (groups) => groups[0],
   },
 };
