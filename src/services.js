@@ -136,12 +136,12 @@ export default {
     width: 400,
   },
   twitter: {
-    regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+?.*)?$/,
-    embedUrl: 'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
+    regex: /^https?:\/\/(www\.)?twitter\.com\/.+\/status\/(\d+)/,
+    embedUrl: 'https://platform.twitter.com/embed/Tweet.html?id=<%= remote_id %>',
     html: '<iframe width="600" height="600" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 300,
     width: 600,
-    id: ids => ids.join('/status/'),
+    id: ids => ids[1],
   },
   pinterest: {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
