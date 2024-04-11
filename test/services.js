@@ -286,6 +286,23 @@ describe('Services Regexps', () => {
         source: 'https://www.instagram.com/p/CfQzzGNphD8/?utm_source=ig_web_copy_link',
         embed: 'https://www.instagram.com/p/CfQzzGNphD8/embed'
       },
+      {
+        source: 'https://www.instagram.com/p/C4_Lsf1NBra/?img_index=1',
+        embed: 'https://www.instagram.com/p/C4_Lsf1NBra/embed'
+      },
+      {
+        source: 'https://www.instagram.com/p/C5ZZUWPydSY/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/C5ZZUWPydSY/embed'
+      },
+      {
+        source: 'https://www.instagram.com/reel/C19IuqJx6wm/',
+        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed'
+      },
+      {
+        source: 'https://www.instagram.com/reel/C19IuqJx6wm/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed'
+      },
+     
     ];
 
     urls.forEach(url => {
