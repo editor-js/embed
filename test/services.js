@@ -425,6 +425,33 @@ describe('Services Regexps', () => {
       expect(embed.data.source).to.be.equal(url.source);
     });
   });
+
+  it('Reddit', async () => {
+    const service = 'reddit';
+
+    const urls = [
+      {
+        source: 'https://www.reddit.com/r/nextjs/comments/15lln9n/why_should_i_learn_nextjs/',
+        embed:'https://www.redditmedia.com/r/nextjs/comments/15lln9n/why_should_i_learn_nextjs/?ref_source=embed&ref=share&embed=true'
+      },
+      {
+        source: 'https://www.reddit.com/r/nextjs/comments/15lln9n/why_should_i_learn_nextjs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button',
+        embed:'https://www.redditmedia.com/r/nextjs/comments/15lln9n/why_should_i_learn_nextjs/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button?ref_source=embed&ref=share&embed=true'
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
 });
 
 describe('Miro service', () => {
