@@ -1,32 +1,82 @@
 import SERVICES from './services';
 import './index.css';
 import { debounce } from 'debounce';
+import { API , PatternPasteEventDetail } from '@editorjs/editorjs';
 
 /**
- * @typedef {object} EmbedData
  * @description Embed Tool data
- * @property {string} service - service name
- * @property {string} url - source URL of embedded content
- * @property {string} embed - URL to source embed page
- * @property {number} [width] - embedded content width
- * @property {number} [height] - embedded content height
- * @property {string} [caption] - content caption
  */
+interface EmbedData {
+  /** Service name */
+  service: string;
+  /** Source URL of embedded content */
+  source: string;
+  /** URL to source embed page */
+  embed: string;
+  /** Embedded content width */
+  width?: number;
+  /** Embedded content height */
+  height?: number;
+  /** Content caption */
+  caption?: string;
+}
+
 /**
- * @typedef {object} PasteEvent
- * @typedef {object} HTMLElement
- * @typedef {object} Service
  * @description Service configuration object
- * @property {RegExp} regex - pattern of source URLs
- * @property {string} embedUrl - URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id
- * @property {string} html - iframe which contains embedded content
- * @property {Function} [id] - function to get resource id from RegExp groups
  */
+interface Service {
+  /** Pattern of source URLs */
+  regex: RegExp;
+  /** URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id */
+  embedUrl: string;
+  /** Iframe which contains embedded content */
+  html: string;
+  /** Function to get resource id from RegExp groups */
+  id?: (ids: string[]) => string;
+  /** Embedded content width */
+  width?: number;
+  /** Embedded content height */
+  height?: number;
+}
+
 /**
- * @typedef {object} EmbedConfig
  * @description Embed tool configuration object
- * @property {object} [services] - additional services provided by user. Each property should contain Service object
  */
+interface EmbedConfig {
+  /** Additional services provided by user */
+  services?: { [key: string]: Service | boolean };
+}
+
+/**
+ * @description CSS object
+ */
+interface CSS {
+  /** Base class for CSS */
+  baseClass: string;
+  /** CSS class for input */
+  input: string;
+  /** CSS class for container */
+  container: string;
+  /** CSS class for loading container */
+  containerLoading: string;
+  /** CSS class for preloader */
+  preloader: string;
+  /** CSS class for caption */
+  caption: string;
+  /** CSS class for URL */
+  url: string;
+  /** CSS class for content */
+  content: string;
+}
+
+interface ConstructorArgs {
+  // data — previously saved data
+  data: EmbedData;
+  // api - Editor.js API
+  api: API;
+  // readOnly - read-only mode flag
+  readOnly: boolean;
+}
 
 /**
  * @class Embed
@@ -40,6 +90,18 @@ import { debounce } from 'debounce';
  * @property {object} patterns - static property with patterns for paste handling configuration
  */
 export default class Embed {
+  /** Editor.js API */
+  private api: API;
+  /** Private property with Embed data */
+  private _data: EmbedData;
+  /** Embedded content container */
+  private element: HTMLElement | null;
+  /** Read-only mode flag */
+  private readOnly: boolean;
+  /** Static property with available services */
+  static services: { [key: string]: Service };
+  /** Static property with patterns for paste handling configuration */
+  static patterns: { [key: string]: RegExp };
   /**
    * @param {{data: EmbedData, config: EmbedConfig, api: object}}
    *   data — previously saved data
@@ -47,9 +109,9 @@ export default class Embed {
    *   api - Editor.js API
    *   readOnly - read-only mode flag
    */
-  constructor({ data, api, readOnly }) {
+  constructor({ data, api, readOnly }: ConstructorArgs) {
     this.api = api;
-    this._data = {};
+    this._data = {} as EmbedData;
     this.element = null;
     this.readOnly = readOnly;
 
@@ -65,7 +127,7 @@ export default class Embed {
    * @param {number} [data.width] - iframe width
    * @param {string} [data.caption] - caption
    */
-  set data(data) {
+  set data(data: EmbedData) {
     if (!(data instanceof Object)) {
       throw Error('Embed Tool data should be object');
     }
@@ -84,16 +146,16 @@ export default class Embed {
     const oldView = this.element;
 
     if (oldView) {
-      oldView.parentNode.replaceChild(this.render(), oldView);
+      oldView.parentNode?.replaceChild(this.render(), oldView);
     }
   }
 
   /**
    * @returns {EmbedData}
    */
-  get data() {
+  get data(): EmbedData {
     if (this.element) {
-      const caption = this.element.querySelector(`.${this.api.styles.input}`);
+      const caption = this.element.querySelector(`.${this.api.styles.input}`) as HTMLElement;
 
       this._data.caption = caption ? caption.innerHTML : '';
     }
@@ -106,7 +168,7 @@ export default class Embed {
    *
    * @returns {object}
    */
-  get CSS() {
+  get CSS(): CSS {
     return {
       baseClass: this.api.styles.block,
       input: this.api.styles.input,
@@ -124,7 +186,7 @@ export default class Embed {
    *
    * @returns {HTMLElement}
    */
-  render() {
+  render(): HTMLElement {
     if (!this.data.service) {
       const container = document.createElement('div');
 
@@ -144,17 +206,19 @@ export default class Embed {
 
     container.appendChild(preloader);
 
-    caption.contentEditable = !this.readOnly;
+    caption.contentEditable = (!this.readOnly).toString();
     caption.dataset.placeholder = this.api.i18n.t('Enter a caption');
     caption.innerHTML = this.data.caption || '';
 
     template.innerHTML = html;
-    template.content.firstChild.setAttribute('src', this.data.embed);
-    template.content.firstChild.classList.add(this.CSS.content);
+    (template.content.firstChild as HTMLElement).setAttribute('src', this.data.embed);
+    (template.content.firstChild as HTMLElement).classList.add(this.CSS.content);
 
     const embedIsReady = this.embedIsReady(container);
 
-    container.appendChild(template.content.firstChild);
+    if (template.content.firstChild) {
+      container.appendChild(template.content.firstChild);
+    }
     container.appendChild(caption);
 
     embedIsReady
@@ -172,7 +236,7 @@ export default class Embed {
    *
    * @returns {HTMLElement}
    */
-  createPreloader() {
+  createPreloader(): HTMLElement {
     const preloader = document.createElement('preloader');
     const url = document.createElement('div');
 
@@ -191,7 +255,7 @@ export default class Embed {
    *
    * @returns {EmbedData}
    */
-  save() {
+  save(): EmbedData {
     return this.data;
   }
 
@@ -200,12 +264,12 @@ export default class Embed {
    *
    * @param {PasteEvent} event - event with pasted data
    */
-  onPaste(event) {
+  onPaste(event: { detail: PatternPasteEventDetail }) {
     const { key: service, data: url } = event.detail;
 
-    const { regex, embedUrl, width, height, id = (ids) => ids.shift() } = Embed.services[service];
-    const result = regex.exec(url).slice(1);
-    const embed = embedUrl.replace(/<%= remote_id %>/g, id(result));
+    const { regex, embedUrl, width, height, id = (ids) => ids.shift() || '' } = Embed.services[service];
+    const result = regex.exec(url)?.slice(1);
+    const embed = result ? embedUrl.replace(/<%= remote_id %>/g, id(result)) : '';
 
     this.data = {
       service,
@@ -221,7 +285,7 @@ export default class Embed {
    *
    * @param {EmbedConfig} config - configuration of embed block element
    */
-  static prepare({ config = {} }) {
+  static prepare({ config = {} } : {config: EmbedConfig}) {
     const { services = {} } = config;
 
     let entries = Object.entries(SERVICES);
@@ -238,9 +302,9 @@ export default class Embed {
       .filter(([key, value]) => {
         return typeof value === 'object';
       })
-      .filter(([key, service]) => Embed.checkServiceConfig(service))
+      .filter(([key, service]) => Embed.checkServiceConfig(service as Service))
       .map(([key, service]) => {
-        const { regex, embedUrl, html, height, width, id } = service;
+        const { regex, embedUrl, html, height, width, id } = service as Service;
 
         return [key, {
           regex,
@@ -249,7 +313,7 @@ export default class Embed {
           height,
           width,
           id,
-        } ];
+        } ] as [string, Service];
       });
 
     if (enabledServices.length) {
@@ -258,9 +322,9 @@ export default class Embed {
 
     entries = entries.concat(userServices);
 
-    Embed.services = entries.reduce((result, [key, service]) => {
+    Embed.services = entries.reduce<{ [key: string]: Service }>((result, [key, service]) => {
       if (!(key in result)) {
-        result[key] = service;
+        result[key] = service as Service;
 
         return result;
       }
@@ -271,8 +335,8 @@ export default class Embed {
     }, {});
 
     Embed.patterns = entries
-      .reduce((result, [key, item]) => {
-        result[key] = item.regex;
+      .reduce<{ [key: string]: RegExp }>((result, [key, item]) => {
+        result[key] = item.regex as RegExp;
 
         return result;
       }, {});
@@ -284,12 +348,12 @@ export default class Embed {
    * @param {Service} config - configuration of embed block element
    * @returns {boolean}
    */
-  static checkServiceConfig(config) {
+  static checkServiceConfig(config: Service): boolean {
     const { regex, embedUrl, html, height, width, id } = config;
 
-    let isValid = regex && regex instanceof RegExp &&
-      embedUrl && typeof embedUrl === 'string' &&
-      html && typeof html === 'string';
+    let isValid = Boolean(regex && regex instanceof RegExp) &&
+      Boolean(embedUrl && typeof embedUrl === 'string') &&
+      Boolean(html && typeof html === 'string');
 
     isValid = isValid && (id !== undefined ? id instanceof Function : true);
     isValid = isValid && (height !== undefined ? Number.isFinite(height) : true);
@@ -324,10 +388,10 @@ export default class Embed {
    * @param {HTMLElement} targetNode - HTML-element mutations of which to listen
    * @returns {Promise<any>} - result that all mutations have finished
    */
-  embedIsReady(targetNode) {
+  embedIsReady(targetNode: HTMLElement): Promise<void> {
     const PRELOADER_DELAY = 450;
 
-    let observer = null;
+    let observer: MutationObserver;
 
     return new Promise((resolve, reject) => {
       observer = new MutationObserver(debounce(resolve, PRELOADER_DELAY));
