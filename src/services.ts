@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-escape */
-export default {
+import { ServiceConfig, ServicesConfigType } from './types/types';
+
+const SERVICES: ServicesConfigType = {
   vimeo: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
@@ -18,7 +20,7 @@ export default {
         return id;
       }
 
-      const paramsMap = {
+      const paramsMap: Record<string, string> = {
         start: 'start',
         end: 'end',
         t: 'start',
@@ -27,7 +29,7 @@ export default {
         list: 'list',
       };
 
-      params = params.slice(1)
+      let newParams = params.slice(1)
         .split('&')
         .map(param => {
           const [name, value] = param.split('=');
@@ -38,7 +40,7 @@ export default {
             return null;
           }
 
-          if (!paramsMap[name]) {
+          if (!(paramsMap[name])) {
             return null;
           }
 
@@ -52,7 +54,7 @@ export default {
         })
         .filter(param => !!param);
 
-      return id + '?' + params.join('&');
+      return id + '?' + newParams.join('&');
     },
   },
   coub: {
@@ -180,3 +182,5 @@ export default {
     id: (groups) => `${groups.join('/')}.js`,
   },
 };
+
+export default SERVICES;
