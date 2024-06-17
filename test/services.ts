@@ -1,12 +1,13 @@
 import { expect } from 'chai';
 
-import EmbedTool from '../src/index';
+import EmbedTool, { EmbedData } from '../src/index';
+import { API } from '@editorjs/editorjs';
 
-EmbedTool.prepare({});
+EmbedTool.prepare({config: {}});
 const { patterns } = EmbedTool.pasteConfig;
-const embed = new EmbedTool({ data: {} });
+const embed = new EmbedTool({data: {} as EmbedData, api: {} as API, readOnly: false});
 
-const composePasteEventMock = (type, service, url) => ({
+const composePasteEventMock = (type: string, service: string, url: string) => ({
   type,
   detail: {
     key: service,
@@ -348,7 +349,7 @@ describe('Services Regexps', () => {
           return pattern.test(url);
         });
 
-        expect(foundService[0]).to.be.equal(name);
+        expect(foundService![0]).to.be.equal(name);
       });
   });
 

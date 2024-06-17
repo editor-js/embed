@@ -1,6 +1,6 @@
 {
   "name": "@editorjs/embed",
-  "version": "2.7.3",
+  "version": "2.7.4",
   "keywords": [
     "codex editor",
     "embed",
@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "mocha -r @babel/register -r ignore-styles --recursive ./test",
+    "test": "mocha --require ts-node/register --require ignore-styles --recursive './test/**/*.ts'",
     "lint": "eslint src/ --ext .js",
     "lint:errors": "eslint src/ --ext .js --quiet",
     "lint:fix": "eslint src/ --ext .js --fix"
@@ -39,7 +39,9 @@
     "@babel/plugin-transform-runtime": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
     "@babel/register": "^7.22.15",
+    "@types/chai": "^4.3.16",
     "@types/debounce": "^1.2.4",
+    "@types/mocha": "^10.0.6",
     "@types/node": "^20.14.2",
     "chai": "^4.2.0",
     "debounce": "^1.2.0",

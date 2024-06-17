@@ -1,12 +1,13 @@
 import SERVICES from './services';
 import './index.css';
 import { debounce } from 'debounce';
+import { ServiceConfig, ServicesConfigType } from './types/types';
 import { API , PatternPasteEventDetail } from '@editorjs/editorjs';
 
 /**
  * @description Embed Tool data
  */
-interface EmbedData {
+export interface EmbedData {
   /** Service name */
   service: string;
   /** Source URL of embedded content */
@@ -22,29 +23,11 @@ interface EmbedData {
 }
 
 /**
- * @description Service configuration object
- */
-interface Service {
-  /** Pattern of source URLs */
-  regex: RegExp;
-  /** URL scheme to embedded page. Use '<%= remote_id %>' to define a place to insert resource id */
-  embedUrl: string;
-  /** Iframe which contains embedded content */
-  html: string;
-  /** Function to get resource id from RegExp groups */
-  id?: (ids: string[]) => string;
-  /** Embedded content width */
-  width?: number;
-  /** Embedded content height */
-  height?: number;
-}
-
-/**
  * @description Embed tool configuration object
  */
 interface EmbedConfig {
   /** Additional services provided by user */
-  services?: { [key: string]: Service | boolean };
+  services?: ServicesConfigType;
 }
 
 /**
@@ -99,7 +82,7 @@ export default class Embed {
   /** Read-only mode flag */
   private readOnly: boolean;
   /** Static property with available services */
-  static services: { [key: string]: Service };
+  static services: { [key: string]: ServiceConfig };
   /** Static property with patterns for paste handling configuration */
   static patterns: { [key: string]: RegExp };
   /**
@@ -302,9 +285,9 @@ export default class Embed {
       .filter(([key, value]) => {
         return typeof value === 'object';
       })
-      .filter(([key, service]) => Embed.checkServiceConfig(service as Service))
+      .filter(([key, service]) => Embed.checkServiceConfig(service as ServiceConfig))
       .map(([key, service]) => {
-        const { regex, embedUrl, html, height, width, id } = service as Service;
+        const { regex, embedUrl, html, height, width, id } = service as ServiceConfig;
 
         return [key, {
           regex,
@@ -313,7 +296,7 @@ export default class Embed {
           height,
           width,
           id,
-        } ] as [string, Service];
+        } ] as [string, ServiceConfig];
       });
 
     if (enabledServices.length) {
@@ -322,9 +305,9 @@ export default class Embed {
 
     entries = entries.concat(userServices);
 
-    Embed.services = entries.reduce<{ [key: string]: Service }>((result, [key, service]) => {
+    Embed.services = entries.reduce<{ [key: string]: ServiceConfig }>((result, [key, service]) => {
       if (!(key in result)) {
-        result[key] = service as Service;
+        result[key] = service as ServiceConfig;
 
         return result;
       }
@@ -336,7 +319,9 @@ export default class Embed {
 
     Embed.patterns = entries
       .reduce<{ [key: string]: RegExp }>((result, [key, item]) => {
-        result[key] = item.regex as RegExp;
+        if (item && typeof item !== 'boolean') {
+          result[key] = (item as ServiceConfig).regex as RegExp;
+        }
 
         return result;
       }, {});
@@ -348,7 +333,7 @@ export default class Embed {
    * @param {Service} config - configuration of embed block element
    * @returns {boolean}
    */
-  static checkServiceConfig(config: Service): boolean {
+  static checkServiceConfig(config: ServiceConfig): boolean {
     const { regex, embedUrl, html, height, width, id } = config;
 
     let isValid = Boolean(regex && regex instanceof RegExp) &&

@@ -1,14 +1,7 @@
 /* eslint-disable no-useless-escape */
-interface Service {
-  regex: RegExp;
-  embedUrl: string;
-  html: string;
-  id?: (ids: string[]) => string;
-  width?: number;
-  height?: number;
-}
+import { ServiceConfig, ServicesConfigType } from './types/types';
 
-const SERVICES: { [key: string]: Service } = {
+const SERVICES: ServicesConfigType = {
   vimeo: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
     embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
