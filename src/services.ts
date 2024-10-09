@@ -137,12 +137,7 @@ const SERVICES: ServicesConfigType = {
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 505,
     width: 400,
-    id: (groups) => {
-      if (groups.length > 0) {
-        const item = groups[0].split("/");
-        return item[0];
-      }
-    },
+    id: (groups: string[]) => groups?.[0]?.split("/")[0],
   },
   twitter: {
     regex: /^https?:\/\/(www\.)?(?:twitter\.com|x\.com)\/.+\/status\/(\d+)/,
