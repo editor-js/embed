@@ -131,11 +131,13 @@ const SERVICES: ServicesConfigType = {
     id: (ids) => ids.join('/embed/'),
   },
   instagram: {
-    regex: /https?:\/\/www\.instagram\.com\/p\/([^\/\?\&]+)\/?.*/,
+    //it support both reel and post
+    regex: /^https:\/\/(?:www\.)?instagram\.com\/(?:reel|p)\/(.*)/,
     embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 505,
     width: 400,
+    id: (groups: string[]) => groups?.[0]?.split("/")[0],
   },
   twitter: {
     regex: /^https?:\/\/(www\.)?(?:twitter\.com|x\.com)\/.+\/status\/(\d+)/,
