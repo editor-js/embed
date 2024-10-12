@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { type ServicesConfigType } from './serviceConfig';
+import type { ServicesConfigType } from './serviceConfig';
 
 const SERVICES: ServicesConfigType = {
   vimeo: {

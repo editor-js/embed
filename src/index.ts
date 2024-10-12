@@ -1,8 +1,8 @@
 import SERVICES from './services';
 import './index.css';
 import { debounce } from 'debounce';
-import { type ServiceConfig, type ServicesConfigType } from './serviceConfig';
-import { type API , type PatternPasteEventDetail } from '@editorjs/editorjs';
+import type { ServiceConfig, ServicesConfigType } from './serviceConfig';
+import type { API , PatternPasteEventDetail } from '@editorjs/editorjs';
 
 /**
  * @description Embed Tool data
