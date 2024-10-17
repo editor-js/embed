@@ -9,6 +9,7 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 
 > `service` — is a service name that will be saved to Tool's [output JSON](#output-data)
 
+- [Reddit](https://www.reddit.com/) - `reddit` service
 - [Facebook](https://www.facebook.com) - `facebook` service
 - [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
 - [YouTube](https://youtube.com) - `youtube` service
