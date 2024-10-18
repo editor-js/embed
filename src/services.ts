@@ -20,7 +20,7 @@ const SERVICES: ServicesConfigType = {
         return id;
       }
 
-      const paramsMap: Record<string, string> = {
+      const paramsMap = {
         start: 'start',
         end: 'end',
         t: 'start',
@@ -29,7 +29,7 @@ const SERVICES: ServicesConfigType = {
         list: 'list',
       };
 
-      let newParams = params.slice(1)
+      params = params.slice(1)
         .split('&')
         .map(param => {
           const [name, value] = param.split('=');
@@ -40,7 +40,7 @@ const SERVICES: ServicesConfigType = {
             return null;
           }
 
-          if (!(paramsMap[name])) {
+          if (!paramsMap[name]) {
             return null;
           }
 
@@ -54,7 +54,7 @@ const SERVICES: ServicesConfigType = {
         })
         .filter(param => !!param);
 
-      return id + '?' + newParams.join('&');
+      return id + '?' + params.join('&');
     },
   },
   coub: {
@@ -131,8 +131,7 @@ const SERVICES: ServicesConfigType = {
     id: (ids) => ids.join('/embed/'),
   },
   instagram: {
-    //it support both reel and post
-    regex: /^https:\/\/(?:www\.)?instagram\.com\/(?:reel|p)\/(.*)/,
+    regex: /https?:\/\/www\.instagram\.com\/p\/([^\/\?\&]+)\/?.*/,
     embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 505,
@@ -140,12 +139,12 @@ const SERVICES: ServicesConfigType = {
     id: (groups: string[]) => groups?.[0]?.split("/")[0],
   },
   twitter: {
-    regex: /^https?:\/\/(www\.)?(?:twitter\.com|x\.com)\/.+\/status\/(\d+)/,
-    embedUrl: 'https://platform.twitter.com/embed/Tweet.html?id=<%= remote_id %>',
+    regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+?.*)?$/,
+    embedUrl: 'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
     html: '<iframe width="600" height="600" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 300,
     width: 600,
-    id: ids => ids[1],
+    id: ids => ids.join('/status/'),
   },
   pinterest: {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
@@ -182,6 +181,21 @@ const SERVICES: ServicesConfigType = {
     height: 300,
     width: 600,
     id: (groups) => `${groups.join('/')}.js`,
+  },
+  whimsical: {
+    regex: /(https:\/\/)?whimsical.com\/(?:[a-zA-Z0-9\-]+\-)?([a-km-zA-HJ-NP-Z1-9]{16,22})(@[a-km-zA-HJ-NP-Z1-9]+)?/,
+    embedUrl: 'https://whimsical.com/embed/<%= remote_id %>',
+    html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600,
+    id: (ids) => ids[1]
+  },
+  figma:{
+    regex: /(https:\/\/www\.figma\.com\/.*)?/,
+    embedUrl: 'https://www.figma.com/embed?embed_host=share&url=<%= remote_id %>',
+    html: "<iframe height='450' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600
   },
 };
 
