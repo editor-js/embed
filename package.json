@@ -54,7 +54,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "vite": "^4.5.0",
-    "vite-plugin-css-injected-by-js": "^3.3.0"
+    "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-dts": "^3.9.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@editorjs/editorjs": "^2.29.1"
+  }
 }
