@@ -20,7 +20,7 @@ const SERVICES: ServicesConfigType = {
         return id;
       }
 
-      const paramsMap = {
+      const paramsMap: Record<string, string> = {
         start: 'start',
         end: 'end',
         t: 'start',
@@ -29,7 +29,7 @@ const SERVICES: ServicesConfigType = {
         list: 'list',
       };
 
-      params = params.slice(1)
+      let newParams = params.slice(1)
         .split('&')
         .map(param => {
           const [name, value] = param.split('=');
@@ -54,7 +54,7 @@ const SERVICES: ServicesConfigType = {
         })
         .filter(param => !!param);
 
-      return id + '?' + params.join('&');
+      return id + '?' + newParams.join('&');
     },
   },
   coub: {
@@ -144,7 +144,7 @@ const SERVICES: ServicesConfigType = {
     html: '<iframe width="600" height="600" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 300,
     width: 600,
-    id: ids => ids.join('/status/'),
+    id: ids => ids[1],
   },
   pinterest: {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
