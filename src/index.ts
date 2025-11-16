@@ -207,6 +207,9 @@ export default class Embed {
     embedIsReady
       .then(() => {
         container.classList.remove(this.CSS.containerLoading);
+        caption.addEventListener('paste', (event: Event) => {
+          event.stopPropagation();
+        });
       });
 
     this.element = container;
