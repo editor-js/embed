@@ -3,16 +3,20 @@ import { expect } from 'chai';
 import EmbedTool, { EmbedData } from '../src/index';
 import { API } from '@editorjs/editorjs';
 
-EmbedTool.prepare({config: {}});
+EmbedTool.prepare({ config: {} });
 const { patterns } = EmbedTool.pasteConfig;
-const embed = new EmbedTool({data: {} as EmbedData, api: {} as API, readOnly: false});
+const embed = new EmbedTool({
+  data: {} as EmbedData,
+  api: {} as API,
+  readOnly: false,
+});
 
 const composePasteEventMock = (type: string, service: string, url: string) => ({
   type,
   detail: {
     key: service,
-    data: url
-  }
+    data: url,
+  },
 });
 
 describe('Services Regexps', () => {
@@ -20,15 +24,45 @@ describe('Services Regexps', () => {
     const service = 'youtube';
 
     const urls = [
-      { source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120', embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120' },
-      { source: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN', embed: 'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN' },
-      { source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8', embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173' },
-      { source: 'https://www.youtube.com/watch?v=efBBjIK3b8I&list=LL&t=1337', embed: 'https://www.youtube.com/embed/efBBjIK3b8I?start=1337' },
-      { source: 'https://www.youtube.com/watch?v=yQUeAin7fII&list=RDMMnMXCzscqi_M', embed: 'https://www.youtube.com/embed/yQUeAin7fII?' },
-      { source: 'https://www.youtube.com/watch?v=3kw2sttGXMI&list=FLgc4xqIMDoiP4KOTFS21TJA', embed: 'https://www.youtube.com/embed/3kw2sttGXMI?' },
+      {
+        source: 'https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=120',
+        embed: 'https://www.youtube.com/embed/wZZ7oFKsKzY?start=120',
+      },
+      {
+        source:
+          'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN',
+        embed:
+          'https://www.youtube.com/embed/_q51LZ2HpbE?list=PLLy6qvPKpdlV3OAw00EuZMoYPz4pYuwuN',
+      },
+      {
+        source: 'https://www.youtube.com/watch?time_continue=173&v=Nd9LbCWpHp8',
+        embed: 'https://www.youtube.com/embed/Nd9LbCWpHp8?start=173',
+      },
+      {
+        source: 'https://www.youtube.com/watch?v=efBBjIK3b8I&list=LL&t=1337',
+        embed: 'https://www.youtube.com/embed/efBBjIK3b8I?start=1337',
+      },
+      {
+        source:
+          'https://www.youtube.com/watch?v=yQUeAin7fII&list=RDMMnMXCzscqi_M',
+        embed: 'https://www.youtube.com/embed/yQUeAin7fII?',
+      },
+      {
+        source:
+          'https://www.youtube.com/watch?v=3kw2sttGXMI&list=FLgc4xqIMDoiP4KOTFS21TJA',
+        embed: 'https://www.youtube.com/embed/3kw2sttGXMI?',
+      },
+      {
+        source: 'https://www.youtube.com/shorts/AAcP_D8fz5c',
+        embed: 'https://www.youtube.com/embed/AAcP_D8fz5c',
+      },
+      {
+        source: 'https://youtube.com/shorts/AAcP_D8fz5c?si=79yc6fwUcvsL-FY_',
+        embed: 'https://www.youtube.com/embed/AAcP_D8fz5c?',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -45,12 +79,21 @@ describe('Services Regexps', () => {
     const service = 'vimeo';
 
     const urls = [
-      { source: 'https://vimeo.com/289836809', embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0' },
-      { source: 'https://www.vimeo.com/280712228', embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0' },
-      { source: 'https://player.vimeo.com/video/504749530', embed: 'https://player.vimeo.com/video/504749530?title=0&byline=0' }
+      {
+        source: 'https://vimeo.com/289836809',
+        embed: 'https://player.vimeo.com/video/289836809?title=0&byline=0',
+      },
+      {
+        source: 'https://www.vimeo.com/280712228',
+        embed: 'https://player.vimeo.com/video/280712228?title=0&byline=0',
+      },
+      {
+        source: 'https://player.vimeo.com/video/504749530',
+        embed: 'https://player.vimeo.com/video/504749530?title=0&byline=0',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -67,11 +110,17 @@ describe('Services Regexps', () => {
     const service = 'coub';
 
     const urls = [
-      { source: 'https://coub.com/view/1efrxs', embed: 'https://coub.com/embed/1efrxs' },
-      { source: 'https://coub.com/view/1c6nrr', embed: 'https://coub.com/embed/1c6nrr' }
+      {
+        source: 'https://coub.com/view/1efrxs',
+        embed: 'https://coub.com/embed/1efrxs',
+      },
+      {
+        source: 'https://coub.com/view/1c6nrr',
+        embed: 'https://coub.com/embed/1c6nrr',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
       const event = composePasteEventMock('pattern', service, url.source);
 
@@ -87,11 +136,17 @@ describe('Services Regexps', () => {
     const service = 'imgur';
 
     const urls = [
-      { source: 'https://imgur.com/gallery/OHbkxgr', embed: 'http://imgur.com/OHbkxgr/embed' },
-      { source: 'https://imgur.com/gallery/TqIWG12', embed: 'http://imgur.com/TqIWG12/embed' }
+      {
+        source: 'https://imgur.com/gallery/OHbkxgr',
+        embed: 'http://imgur.com/OHbkxgr/embed',
+      },
+      {
+        source: 'https://imgur.com/gallery/TqIWG12',
+        embed: 'http://imgur.com/TqIWG12/embed',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -108,11 +163,17 @@ describe('Services Regexps', () => {
     const service = 'gfycat';
 
     const urls = [
-      { source: 'https://gfycat.com/EsteemedMarvelousHagfish', embed: 'https://gfycat.com/ifr/EsteemedMarvelousHagfish' },
-      { source: 'https://gfycat.com/OddCornyLeech', embed: 'https://gfycat.com/ifr/OddCornyLeech' }
+      {
+        source: 'https://gfycat.com/EsteemedMarvelousHagfish',
+        embed: 'https://gfycat.com/ifr/EsteemedMarvelousHagfish',
+      },
+      {
+        source: 'https://gfycat.com/OddCornyLeech',
+        embed: 'https://gfycat.com/ifr/OddCornyLeech',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
       const event = composePasteEventMock('pattern', service, url.source);
 
@@ -128,11 +189,17 @@ describe('Services Regexps', () => {
     const service = 'twitch-channel';
 
     const urls = [
-      { source: 'https://www.twitch.tv/ninja', embed: 'https://player.twitch.tv/?channel=ninja' },
-      { source: 'https://www.twitch.tv/gohamedia', embed: 'https://player.twitch.tv/?channel=gohamedia' }
+      {
+        source: 'https://www.twitch.tv/ninja',
+        embed: 'https://player.twitch.tv/?channel=ninja',
+      },
+      {
+        source: 'https://www.twitch.tv/gohamedia',
+        embed: 'https://player.twitch.tv/?channel=gohamedia',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
       const event = composePasteEventMock('pattern', service, url.source);
 
@@ -148,11 +215,17 @@ describe('Services Regexps', () => {
     const service = 'twitch-video';
 
     const urls = [
-      { source: 'https://www.twitch.tv/videos/315468440', embed: 'https://player.twitch.tv/?video=v315468440' },
-      { source: 'https://www.twitch.tv/videos/314691366', embed: 'https://player.twitch.tv/?video=v314691366' }
+      {
+        source: 'https://www.twitch.tv/videos/315468440',
+        embed: 'https://player.twitch.tv/?video=v315468440',
+      },
+      {
+        source: 'https://www.twitch.tv/videos/314691366',
+        embed: 'https://player.twitch.tv/?video=v314691366',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -169,11 +242,17 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-album';
 
     const urls = [
-      { source: 'https://music.yandex.ru/album/5643859', embed: 'https://music.yandex.ru/iframe/#album/5643859/' },
-      { source: 'https://music.yandex.ru/album/5393158', embed: 'https://music.yandex.ru/iframe/#album/5393158/' }
+      {
+        source: 'https://music.yandex.ru/album/5643859',
+        embed: 'https://music.yandex.ru/iframe/#album/5643859/',
+      },
+      {
+        source: 'https://music.yandex.ru/album/5393158',
+        embed: 'https://music.yandex.ru/iframe/#album/5393158/',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -190,11 +269,17 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-track';
 
     const urls = [
-      { source: 'https://music.yandex.ru/album/5643859/track/42662275', embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/' },
-      { source: 'https://music.yandex.ru/album/5393158/track/41249158', embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/' }
+      {
+        source: 'https://music.yandex.ru/album/5643859/track/42662275',
+        embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/',
+      },
+      {
+        source: 'https://music.yandex.ru/album/5393158/track/41249158',
+        embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -211,11 +296,21 @@ describe('Services Regexps', () => {
     const service = 'yandex-music-playlist';
 
     const urls = [
-      { source: 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/' },
-      { source: 'https://music.yandex.ru/users/yamusic-personal/playlists/27924603', embed: 'https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/' }
+      {
+        source:
+          'https://music.yandex.ru/users/yamusic-personal/playlists/25098905',
+        embed:
+          'https://music.yandex.ru/iframe/#playlist/yamusic-personal/25098905/show/cover/description/',
+      },
+      {
+        source:
+          'https://music.yandex.ru/users/yamusic-personal/playlists/27924603',
+        embed:
+          'https://music.yandex.ru/iframe/#playlist/yamusic-personal/27924603/show/cover/description/',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
       const event = composePasteEventMock('pattern', service, url.source);
 
@@ -231,11 +326,19 @@ describe('Services Regexps', () => {
     const service = 'codepen';
 
     const urls = [
-      { source: 'https://codepen.io/Rikkokiri/pen/RYBrwG', embed: 'https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2' },
-      { source: 'https://codepen.io/geoffgraham/pen/bxEVEN', embed: 'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2' }
+      {
+        source: 'https://codepen.io/Rikkokiri/pen/RYBrwG',
+        embed:
+          'https://codepen.io/Rikkokiri/embed/RYBrwG?height=300&theme-id=0&default-tab=css,result&embed-version=2',
+      },
+      {
+        source: 'https://codepen.io/geoffgraham/pen/bxEVEN',
+        embed:
+          'https://codepen.io/geoffgraham/embed/bxEVEN?height=300&theme-id=0&default-tab=css,result&embed-version=2',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -254,19 +357,23 @@ describe('Services Regexps', () => {
     const urls = [
       {
         source: 'https://twitter.com/codex_team/status/1202295536826630145',
-        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145'
+        embed:
+          'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145',
       },
       {
-        source: 'https://twitter.com/codex_team/status/1202295536826630145?s=20&t=wrY8ei5GBjbbmNonrEm2kQ',
-        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145'
+        source:
+          'https://twitter.com/codex_team/status/1202295536826630145?s=20&t=wrY8ei5GBjbbmNonrEm2kQ',
+        embed:
+          'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145',
       },
       {
         source: 'https://x.com/codex_team/status/1202295536826630145',
-        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145'
+        embed:
+          'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145',
       },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -285,32 +392,34 @@ describe('Services Regexps', () => {
     const urls = [
       {
         source: 'https://www.instagram.com/p/B--iRCFHVxI/',
-        embed: 'https://www.instagram.com/p/B--iRCFHVxI/embed'
+        embed: 'https://www.instagram.com/p/B--iRCFHVxI/embed',
       },
       {
-        source: 'https://www.instagram.com/p/CfQzzGNphD8/?utm_source=ig_web_copy_link',
-        embed: 'https://www.instagram.com/p/CfQzzGNphD8/embed'
+        source:
+          'https://www.instagram.com/p/CfQzzGNphD8/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/CfQzzGNphD8/embed',
       },
       {
         source: 'https://www.instagram.com/p/C4_Lsf1NBra/?img_index=1',
-        embed: 'https://www.instagram.com/p/C4_Lsf1NBra/embed'
+        embed: 'https://www.instagram.com/p/C4_Lsf1NBra/embed',
       },
       {
-        source: 'https://www.instagram.com/p/C5ZZUWPydSY/?utm_source=ig_web_copy_link',
-        embed: 'https://www.instagram.com/p/C5ZZUWPydSY/embed'
+        source:
+          'https://www.instagram.com/p/C5ZZUWPydSY/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/C5ZZUWPydSY/embed',
       },
       {
         source: 'https://www.instagram.com/reel/C19IuqJx6wm/',
-        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed'
+        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed',
       },
       {
-        source: 'https://www.instagram.com/reel/C19IuqJx6wm/?utm_source=ig_web_copy_link',
-        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed'
+        source:
+          'https://www.instagram.com/reel/C19IuqJx6wm/?utm_source=ig_web_copy_link',
+        embed: 'https://www.instagram.com/p/C19IuqJx6wm/embed',
       },
-     
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -358,11 +467,12 @@ describe('Services Regexps', () => {
     const urls = [
       {
         source: 'https://www.aparat.com/v/tDZe5',
-        embed: 'https://www.aparat.com/video/video/embed/videohash/tDZe5/vt/frame'
+        embed:
+          'https://www.aparat.com/video/video/embed/videohash/tDZe5/vt/frame',
       },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -385,22 +495,21 @@ describe('Services Regexps', () => {
       'twitch-channel': 'https://www.twitch.tv/ninja',
       'twitch-video': 'https://www.twitch.tv/videos/315468440',
       'yandex-music-album': 'https://music.yandex.ru/album/5643859',
-      'yandex-music-track': 'https://music.yandex.ru/album/5643859/track/42662275',
-      'yandex-music-playlist': 'https://music.yandex.ru/users/yamusic-personal/playlists/25098905',
-      'codepen': 'https://codepen.io/Rikkokiri/pen/RYBrwG'
+      'yandex-music-track':
+        'https://music.yandex.ru/album/5643859/track/42662275',
+      'yandex-music-playlist':
+        'https://music.yandex.ru/users/yamusic-personal/playlists/25098905',
+      codepen: 'https://codepen.io/Rikkokiri/pen/RYBrwG',
     };
 
-    Object
-      .entries(services)
-      .forEach(([name, url]) => {
-        const foundService = Object.entries(patterns).find(([key, pattern]) => {
-          return pattern.test(url);
-        });
-
-        expect(foundService![0]).to.be.equal(name);
+    Object.entries(services).forEach(([name, url]) => {
+      const foundService = Object.entries(patterns).find(([key, pattern]) => {
+        return pattern.test(url);
       });
-  });
 
+      expect(foundService![0]).to.be.equal(name);
+    });
+  });
 
   it('Pinterest', async () => {
     const service = 'pinterest';
@@ -408,11 +517,12 @@ describe('Services Regexps', () => {
     const urls = [
       {
         source: 'https://tr.pinterest.com/pin/409757266103637553/',
-        embed: 'https://assets.pinterest.com/ext/embed.html?id=409757266103637553'
+        embed:
+          'https://assets.pinterest.com/ext/embed.html?id=409757266103637553',
       },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -430,16 +540,19 @@ describe('Services Regexps', () => {
 
     const urls = [
       {
-        source: 'https://www.facebook.com/genclikforeverresmi/videos/944647522284479',
-        embed: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/genclikforeverresmi/videos/944647522284479&width=500'
+        source:
+          'https://www.facebook.com/genclikforeverresmi/videos/944647522284479',
+        embed:
+          'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/genclikforeverresmi/videos/944647522284479&width=500',
       },
       {
-        source:'https://www.facebook.com/0devco/posts/497515624410920',
-        embed: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/0devco/posts/497515624410920&width=500'
-      }
+        source: 'https://www.facebook.com/0devco/posts/497515624410920',
+        embed:
+          'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/0devco/posts/497515624410920&width=500',
+      },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -457,16 +570,20 @@ describe('Services Regexps', () => {
 
     const urls = [
       {
-        source: 'https://gist.github.com/userharis/091b56505c804276e1f91925976f11db',
-        embed: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/091b56505c804276e1f91925976f11db.js" ></script></body>',
+        source:
+          'https://gist.github.com/userharis/091b56505c804276e1f91925976f11db',
+        embed:
+          'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/091b56505c804276e1f91925976f11db.js" ></script></body>',
       },
       {
-        source: 'https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306',
-        embed: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306.js" ></script></body>',
+        source:
+          'https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306',
+        embed:
+          'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/userharis/a8c2977094d4716c43e35e6c20b7d306.js" ></script></body>',
       },
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       expect(patterns[service].test(url.source)).to.be.true;
 
       const event = composePasteEventMock('pattern', service, url.source);
@@ -489,8 +606,9 @@ describe('Miro service', () => {
 
     expect(patterns.miro.test(regularBoardUrl)).to.be.true;
     expect(embed.data.service).to.be.equal('miro');
-    expect(embed.data.embed).to.be.equal('https://miro.com/app/live-embed/10J_kw57KxQ=');
+    expect(embed.data.embed).to.be.equal(
+      'https://miro.com/app/live-embed/10J_kw57KxQ='
+    );
     expect(embed.data.source).to.be.equal(regularBoardUrl);
-  })
+  });
 });
-
