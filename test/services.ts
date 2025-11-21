@@ -612,3 +612,31 @@ describe('Miro service', () => {
     expect(embed.data.source).to.be.equal(regularBoardUrl);
   });
 });
+
+describe('whimsical', () => {
+  it('should correctly parse URL got from a browser', () => {
+    const regularBoardUrl = 'https://whimsical.com/test-86ajy7vWEzYATvwFFvbwfA';
+    const event = composePasteEventMock('pattern', 'whimsical', regularBoardUrl);
+
+    embed.onPaste(event);
+
+    expect(patterns.whimsical.test(regularBoardUrl)).to.be.true;
+    expect(embed.data.service).to.be.equal('whimsical');
+    expect(embed.data.embed).to.be.equal('https://whimsical.com/embed/86ajy7vWEzYATvwFFvbwfA');
+    expect(embed.data.source).to.be.equal(regularBoardUrl);
+  });
+});
+
+describe('figma', () => {
+  it('should correctly parse URL got from a browser', () => {
+    const regularBoardUrl = 'https://www.figma.com/file/3BYrViWFPvfhbrpm1aO3ha/Untitled?type=design&node-id=0%3A1&mode=design&t=WutMRT9L8VJNEL5z-1';
+    const event = composePasteEventMock('pattern', 'figma', regularBoardUrl);
+
+    embed.onPaste(event);
+
+    expect(patterns.figma.test(regularBoardUrl)).to.be.true;
+    expect(embed.data.service).to.be.equal('figma');
+    expect(embed.data.embed).to.be.equal('https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/file/3BYrViWFPvfhbrpm1aO3ha/Untitled?type=design&node-id=0%3A1&mode=design&t=WutMRT9L8VJNEL5z-1');
+    expect(embed.data.source).to.be.equal(regularBoardUrl);
+  });
+});

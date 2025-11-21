@@ -26,9 +26,9 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 - [Pinterest](https://www.pinterest.com) - `pinterest` service
 - [GitHub Gist](https://gist.github.com) - `github` service
 - [Reddit](https://www.reddit.com/) - `reddit` service
+- [Figma](https://www.figma.com/) - `figma` service
+- [Whimsical](https://whimsical.com/) - whimsical service
 - 👇 Any other [customized service](#add-more-services)
-
-
 
 ## Installation
 
@@ -152,6 +152,7 @@ var editor = EditorJS({
 ```
 
 #### Inline Toolbar
+
 Editor.js provides useful inline toolbar. You can allow it\`s usage in the Embed Tool caption by providing `inlineToolbar: true`.
 
 ```javascript
@@ -180,7 +181,6 @@ var editor = EditorJS({
 | width   | `number` | embedded content width
 | height  | `number` | embedded content height
 | caption | `string` | content caption
-
 
 ```json
 {

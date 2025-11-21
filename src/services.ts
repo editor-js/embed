@@ -140,7 +140,6 @@ const SERVICES: ServicesConfigType = {
     id: (ids) => ids.join('/embed/'),
   },
   instagram: {
-    //it support both reel and post
     regex: /^https:\/\/(?:www\.)?instagram\.com\/(?:reel|p)\/(.*)/,
     embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
@@ -204,6 +203,21 @@ const SERVICES: ServicesConfigType = {
     height: 300,
     width: 600,
     id: (groups) => `${groups.join('/')}.js`,
+  },
+  whimsical: {
+    regex: /(https:\/\/)?whimsical.com\/(?:[a-zA-Z0-9\-]+\-)?([a-km-zA-HJ-NP-Z1-9]{16,22})(@[a-km-zA-HJ-NP-Z1-9]+)?/,
+    embedUrl: 'https://whimsical.com/embed/<%= remote_id %>',
+    html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600,
+    id: (ids) => ids[1]
+  },
+  figma:{
+    regex: /(https:\/\/www\.figma\.com\/.*)?/,
+    embedUrl: 'https://www.figma.com/embed?embed_host=share&url=<%= remote_id %>',
+    html: "<iframe height='450' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600
   },
 };
 
