@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embed Tool | EditorJS</title>
+  </head>
+  <body>
+    <div id="editorjs"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script type="module">
+      import Embed from "./src/index.ts";
+      
+      const editor = new EditorJS({
+        holder: 'editorjs',
+        tools: {
+          embed: {
+            class: Embed,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
