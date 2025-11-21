@@ -12,7 +12,7 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 - [Facebook](https://www.facebook.com) - `facebook` service
 - [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
 - [YouTube](https://youtube.com) - `youtube` service
-- [Twitter](https://twitter.com/codex_team) - `twitter` service. (https://twitframe.com used for render)
+- [X](https://twitter.com) - `twitter` service. (official twitter api is used for render, no need to use twitframe)
 - [Twitch](https://twitch.tv) - `twitch-video` service for videos and `twitch-channel` for channels
 - [Miro](https://miro.com) - `miro` service
 - [Vimeo](https://vimeo.com) — `vimeo` service
@@ -25,9 +25,10 @@ Tool uses Editor.js pasted patterns handling and inserts iframe with embedded co
 - [CodePen](https://codepen.io) — `codepen` service
 - [Pinterest](https://www.pinterest.com) - `pinterest` service
 - [GitHub Gist](https://gist.github.com) - `github` service
+- [Reddit](https://www.reddit.com/) - `reddit` service
+- [Figma](https://www.figma.com/) - `figma` service
+- [Whimsical](https://whimsical.com/) - whimsical service
 - 👇 Any other [customized service](#add-more-services)
-
-
 
 ## Installation
 
@@ -151,6 +152,7 @@ var editor = EditorJS({
 ```
 
 #### Inline Toolbar
+
 Editor.js provides useful inline toolbar. You can allow it\`s usage in the Embed Tool caption by providing `inlineToolbar: true`.
 
 ```javascript
@@ -179,7 +181,6 @@ var editor = EditorJS({
 | width   | `number` | embedded content width
 | height  | `number` | embedded content height
 | caption | `string` | content caption
-
 
 ```json
 {
