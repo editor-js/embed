@@ -274,12 +274,12 @@ describe('Services Regexps', () => {
 
     const urls = [
       {
-        source: 'https://music.yandex.ru/album/5643859/track/42662275',
-        embed: 'https://music.yandex.ru/iframe/#track/5643859/42662275/',
+        source: 'https://music.yandex.ru/track/49235718?utm_source=web&utm_medium=copy_link',
+        embed: 'https://music.yandex.ru/iframe/#track/49235718/',
       },
       {
-        source: 'https://music.yandex.ru/album/5393158/track/41249158',
-        embed: 'https://music.yandex.ru/iframe/#track/5393158/41249158/',
+        source: 'https://music.yandex.ru/track/42662275',
+        embed: 'https://music.yandex.ru/iframe/#track/42662275/',
       },
     ];
 
@@ -500,10 +500,11 @@ describe('Services Regexps', () => {
       'twitch-video': 'https://www.twitch.tv/videos/315468440',
       'yandex-music-album': 'https://music.yandex.ru/album/5643859',
       'yandex-music-track':
-        'https://music.yandex.ru/album/5643859/track/42662275',
+        'https://music.yandex.ru/track/42662275',
       'yandex-music-playlist':
         'https://music.yandex.ru/users/yamusic-personal/playlists/25098905',
       codepen: 'https://codepen.io/Rikkokiri/pen/RYBrwG',
+
     };
 
     Object.entries(services).forEach(([name, url]) => {
