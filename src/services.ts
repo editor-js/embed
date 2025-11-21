@@ -1,14 +1,19 @@
 /* eslint-disable no-useless-escape */
-export default {
+import type { ServicesConfigType } from './serviceConfig';
+
+const SERVICES: ServicesConfigType = {
   vimeo: {
-    regex: /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
-    embedUrl: 'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
+    regex:
+      /(?:http[s]?:\/\/)?(?:www.)?(?:player.)?vimeo\.co(?:.+\/([^\/]\d+)(?:#t=[\d]+)?s?$)/,
+    embedUrl:
+      'https://player.vimeo.com/video/<%= remote_id %>?title=0&byline=0',
     html: '<iframe style="width:100%;" height="320" frameborder="0"></iframe>',
     height: 320,
     width: 580,
   },
   youtube: {
-    regex: /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=[\w%+]*))*/,
+    regex:
+      /(?:https?:\/\/)?(?:www\.)?(?:(?:youtu\.be\/)|(?:youtube\.com)\/(?:v\/|u\/\w\/|embed\/|watch|shorts\/))(?:(?:\?v=)?([^#&?=]*))?((?:[?&]\w*=[\w%+]*)*)/,
     embedUrl: 'https://www.youtube.com/embed/<%= remote_id %>',
     html: '<iframe style="width:100%;" height="320" frameborder="0" allowfullscreen></iframe>',
     height: 320,
@@ -18,7 +23,7 @@ export default {
         return id;
       }
 
-      const paramsMap = {
+      const paramsMap: Record<string, string> = {
         start: 'start',
         end: 'end',
         t: 'start',
@@ -27,9 +32,10 @@ export default {
         list: 'list',
       };
 
-      params = params.slice(1)
+      let newParams = params
+        .slice(1)
         .split('&')
-        .map(param => {
+        .map((param) => {
           const [name, value] = param.split('=');
 
           if (!id && name === 'v') {
@@ -42,17 +48,19 @@ export default {
             return null;
           }
 
-          if (value === 'LL' 
-            || value.startsWith('RDMM')
-            || value.startsWith('FL')) {
+          if (
+            value === 'LL' ||
+            value.startsWith('RDMM') ||
+            value.startsWith('FL')
+          ) {
             return null;
           }
 
           return `${paramsMap[name]}=${value}`;
         })
-        .filter(param => !!param);
+        .filter((param) => !!param);
 
-      return id + '?' + params.join('&');
+      return id + '?' + newParams.join('&');
     },
   },
   coub: {
@@ -99,22 +107,24 @@ export default {
   },
   'yandex-music-album': {
     regex: /https?:\/\/music\.yandex\.ru\/album\/([0-9]*)\/?$/,
-    embedUrl: 'https://music\.yandex\.ru/iframe/#album/<%= remote_id %>/',
-    html: '<iframe frameborder=\"0\" style=\"border:none;width:540px;height:400px;\" style=\"width:100%;\" height=\"400\"></iframe>',
+    embedUrl: 'https://music.yandex.ru/iframe/#album/<%= remote_id %>/',
+    html: '<iframe frameborder="0" style="border:none;width:540px;height:400px;" style="width:100%;" height="400"></iframe>',
     height: 400,
     width: 540,
   },
   'yandex-music-track': {
     regex: /https?:\/\/music\.yandex\.ru\/album\/([0-9]*)\/track\/([0-9]*)/,
-    embedUrl: 'https://music\.yandex\.ru/iframe/#track/<%= remote_id %>/',
+    embedUrl: 'https://music.yandex.ru/iframe/#track/<%= remote_id %>/',
     html: '<iframe frameborder="0" style="border:none;width:540px;height:100px;" style="width:100%;" height="100"></iframe>',
     height: 100,
     width: 540,
     id: (ids) => ids.join('/'),
   },
   'yandex-music-playlist': {
-    regex: /https?:\/\/music\.yandex\.ru\/users\/([^\/\?\&]*)\/playlists\/([0-9]*)/,
-    embedUrl: 'https://music\.yandex\.ru/iframe/#playlist/<%= remote_id %>/show/cover/description/',
+    regex:
+      /https?:\/\/music\.yandex\.ru\/users\/([^\/\?\&]*)\/playlists\/([0-9]*)/,
+    embedUrl:
+      'https://music.yandex.ru/iframe/#playlist/<%= remote_id %>/show/cover/description/',
     html: '<iframe frameborder="0" style="border:none;width:540px;height:400px;" width="540" height="400"></iframe>',
     height: 400,
     width: 540,
@@ -122,26 +132,38 @@ export default {
   },
   codepen: {
     regex: /https?:\/\/codepen\.io\/([^\/\?\&]*)\/pen\/([^\/\?\&]*)/,
-    embedUrl: 'https://codepen.io/<%= remote_id %>?height=300&theme-id=0&default-tab=css,result&embed-version=2',
+    embedUrl:
+      'https://codepen.io/<%= remote_id %>?height=300&theme-id=0&default-tab=css,result&embed-version=2',
     html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
     height: 300,
     width: 600,
     id: (ids) => ids.join('/embed/'),
   },
   instagram: {
-    regex: /https?:\/\/www\.instagram\.com\/p\/([^\/\?\&]+)\/?.*/,
+    regex: /^https:\/\/(?:www\.)?instagram\.com\/(?:reel|p)\/(.*)/,
     embedUrl: 'https://www.instagram.com/p/<%= remote_id %>/embed',
     html: '<iframe width="400" height="505" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 505,
     width: 400,
+    id: (groups: string[]) => groups?.[0]?.split('/')[0],
   },
   twitter: {
-    regex: /^https?:\/\/twitter\.com\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+?.*)?$/,
-    embedUrl: 'https://twitframe.com/show?url=https://twitter.com/<%= remote_id %>',
+    regex: /^https?:\/\/(www\.)?(?:twitter\.com|x\.com)\/.+\/status\/(\d+)/,
+    embedUrl:
+      'https://platform.twitter.com/embed/Tweet.html?id=<%= remote_id %>',
     html: '<iframe width="600" height="600" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 300,
     width: 600,
-    id: ids => ids.join('/status/'),
+    id: (ids) => ids[1],
+  },
+  reddit: {
+    regex: /https:\/\/www\.reddit\.com\/(.*)/,
+    embedUrl:
+      "https://www.redditmedia.com/<%= remote_id %>?ref_source=embed&ref=share&embed=true",
+    html: "<iframe height='300' width='100%' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    width: 600,
+    height: 300,
+    id: (ids) => ids[0],
   },
   pinterest: {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
@@ -153,7 +175,8 @@ export default {
   },
   facebook: {
     regex: /https?:\/\/www.facebook.com\/([^\/\?\&]*)\/(.*)/,
-    embedUrl: 'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/<%= remote_id %>&width=500',
+    embedUrl:
+      'https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/<%= remote_id %>&width=500',
     html: "<iframe scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%; min-height: 500px; max-height: 1000px;'></iframe>",
     id: (ids) => {
       return ids.join('/');
@@ -161,7 +184,8 @@ export default {
   },
   aparat: {
     regex: /(?:http[s]?:\/\/)?(?:www.)?aparat\.com\/v\/([^\/\?\&]+)\/?/,
-    embedUrl: 'https://www.aparat.com/video/video/embed/videohash/<%= remote_id %>/vt/frame',
+    embedUrl:
+      'https://www.aparat.com/video/video/embed/videohash/<%= remote_id %>/vt/frame',
     html: '<iframe width="600" height="300" style="margin: 0 auto;" frameborder="0" scrolling="no" allowtransparency="true"></iframe>',
     height: 300,
     width: 600,
@@ -173,10 +197,28 @@ export default {
   },
   github: {
     regex: /https?:\/\/gist.github.com\/([^\/\?\&]*)\/([^\/\?\&]*)/,
-    embedUrl: 'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/<%= remote_id %>" ></script></body>',
+    embedUrl:
+      'data:text/html;charset=utf-8,<head><base target="_blank" /></head><body><script src="https://gist.github.com/<%= remote_id %>" ></script></body>',
     html: '<iframe width="100%" height="350" frameborder="0" style="margin: 0 auto;"></iframe>',
     height: 300,
     width: 600,
     id: (groups) => `${groups.join('/')}.js`,
   },
+  whimsical: {
+    regex: /(https:\/\/)?whimsical.com\/(?:[a-zA-Z0-9\-]+\-)?([a-km-zA-HJ-NP-Z1-9]{16,22})(@[a-km-zA-HJ-NP-Z1-9]+)?/,
+    embedUrl: 'https://whimsical.com/embed/<%= remote_id %>',
+    html: "<iframe height='300' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600,
+    id: (ids) => ids[1]
+  },
+  figma:{
+    regex: /(https:\/\/www\.figma\.com\/.*)?/,
+    embedUrl: 'https://www.figma.com/embed?embed_host=share&url=<%= remote_id %>',
+    html: "<iframe height='450' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    height: 300,
+    width: 600
+  },
 };
+
+export default SERVICES;
