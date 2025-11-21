@@ -264,6 +264,18 @@ describe('Services Regexps', () => {
         source: 'https://x.com/codex_team/status/1202295536826630145',
         embed: 'https://platform.twitter.com/embed/Tweet.html?id=1202295536826630145'
       },
+      {
+        source: 'https://x.com/MrShibolet/status/1990842843481387410',
+        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1990842843481387410'
+      },
+      {
+        source: 'https://x.com/MrShibolet/status/1990842843481387410?s=20',
+        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1990842843481387410'
+      },
+      {
+        source: 'https://x.com/cb_doge/status/1817235892916146413/photo/1',
+        embed: 'https://platform.twitter.com/embed/Tweet.html?id=1817235892916146413'
+      },
     ];
 
     urls.forEach(url => {
