@@ -1,18 +1,18 @@
-import path from "path";
+import path from 'path';
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import * as pkg from "./package.json";
 import dts from 'vite-plugin-dts';
 
-const NODE_ENV = process.argv.mode || "development";
+const NODE_ENV = process.argv.mode || 'development';
 const VERSION = pkg.version;
 
 export default {
   build: {
     copyPublicDir: false,
     lib: {
-      entry: path.resolve(__dirname, "src", "index.ts"),
-      name: "Embed",
-      fileName: "embed",
+      entry: path.resolve(__dirname, 'src', 'index.ts'),
+      name: 'Embed',
+      fileName: 'embed',
     },
   },
   define: {
@@ -22,7 +22,7 @@ export default {
 
   plugins: [cssInjectedByJsPlugin(),
     dts({
-      tsconfigPath: './tsconfig.json'
-    })
+      tsconfigPath: './tsconfig.json',
+    }),
   ],
 };
