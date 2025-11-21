@@ -431,6 +431,37 @@ describe('Services Regexps', () => {
       expect(embed.data.source).to.be.equal(url.source);
     });
   });
+
+  it('Reddit', async () => {
+    const service = 'reddit';
+
+    const urls = [
+      {
+        source: "https://www.reddit.com/r/news/comments/1g5b240/liam_payne_former_one_direction_member_dead_at_31/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button",
+        embed: "https://www.redditmedia.com/r/news/comments/1g5b240/liam_payne_former_one_direction_member_dead_at_31/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button?ref_source=embed&ref=share&embed=true"
+      },
+      {
+        source: "https://www.reddit.com/r/news/comments/1fvdajx/comment/lq6aokl/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button",
+        embed: "https://www.redditmedia.com/r/news/comments/1fvdajx/comment/lq6aokl/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button?ref_source=embed&ref=share&embed=true"
+      },
+      {
+        source: "https://www.reddit.com/r/news/comments/1fvdajx/central_pa_school_district_installs_surveillance/",
+        embed: "https://www.redditmedia.com/r/news/comments/1fvdajx/central_pa_school_district_installs_surveillance/?ref_source=embed&ref=share&embed=true"
+      },
+    ];
+
+    urls.forEach(url => {
+      expect(patterns[service].test(url.source)).to.be.true;
+
+      const event = composePasteEventMock('pattern', service, url.source);
+
+      embed.onPaste(event);
+
+      expect(embed.data.service).to.be.equal(service);
+      expect(embed.data.embed).to.be.equal(url.embed);
+      expect(embed.data.source).to.be.equal(url.source);
+    });
+  });
   it('Aparat', async () => {
     const service = 'aparat';
     const urls = [

@@ -10,6 +10,7 @@
   "description": "Embed Tool for Editor.js",
   "license": "MIT",
   "repository": "https://github.com/editor-js/embed",
+  "packageManager": "yarn@1.22.22",
   "files": [
     "dist"
   ],
@@ -34,15 +35,14 @@
     "name": "CodeX",
     "email": "team@codex.so"
   },
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "devDependencies": {
-    "@babel/core": "^7.24.4",
-    "@babel/plugin-transform-runtime": "^7.23.2",
-    "@babel/preset-env": "^7.23.2",
-    "@babel/register": "^7.22.15",
     "@types/chai": "^4.3.16",
     "@types/debounce": "^1.2.4",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^20.14.2",
+    "@types/node": "^24.0.0",
     "chai": "^4.2.0",
     "debounce": "^1.2.0",
     "eslint": "^7.25.0",
@@ -58,6 +58,6 @@
     "vite-plugin-dts": "^3.9.1"
   },
   "dependencies": {
-    "@editorjs/editorjs": "^2.29.1"
+    "@editorjs/editorjs": "^2.31.0"
   }
 }

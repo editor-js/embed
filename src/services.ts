@@ -157,6 +157,15 @@ const SERVICES: ServicesConfigType = {
     width: 600,
     id: (ids) => ids[1],
   },
+  reddit: {
+    regex: /https:\/\/www\.reddit\.com\/(.*)/,
+    embedUrl:
+      "https://www.redditmedia.com/<%= remote_id %>?ref_source=embed&ref=share&embed=true",
+    html: "<iframe height='300' width='100%' scrolling='no' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>",
+    width: 600,
+    height: 300,
+    id: (ids) => ids[0],
+  },
   pinterest: {
     regex: /https?:\/\/([^\/\?\&]*).pinterest.com\/pin\/([^\/\?\&]*)\/?$/,
     embedUrl: 'https://assets.pinterest.com/ext/embed.html?id=<%= remote_id %>',
