@@ -60,6 +60,10 @@ describe('Services Regexps', () => {
         source: 'https://youtube.com/shorts/AAcP_D8fz5c?si=79yc6fwUcvsL-FY_',
         embed: 'https://www.youtube.com/embed/AAcP_D8fz5c?',
       },
+      {
+        source: 'https://www.youtube.com/watch?v=kU9y8rKCe3w&ab_channel=Well%2BGood',
+        embed: 'https://www.youtube.com/embed/kU9y8rKCe3w?',
+      },
     ];
 
     urls.forEach((url) => {
