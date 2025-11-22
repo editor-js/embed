@@ -5,37 +5,46 @@
 Provides Block tool for embedded content for the [Editor.js](https://editorjs.io).
 Tool uses Editor.js pasted patterns handling and inserts iframe with embedded content.
 
-## Installation
+## List of services supported
 
-### Install via NPM
+> `service` — is a service name that will be saved to Tool's [output JSON](#output-data)
+
+- [Facebook](https://www.facebook.com) - `facebook` service
+- [Instagram](https://www.instagram.com/codex_team/) - `instagram` service
+- [YouTube](https://youtube.com) - `youtube` service
+- [X](https://twitter.com) - `twitter` service. (official twitter api is used for render, no need to use twitframe)
+- [Twitch](https://twitch.tv) - `twitch-video` service for videos and `twitch-channel` for channels
+- [Miro](https://miro.com) - `miro` service
+- [Vimeo](https://vimeo.com) — `vimeo` service
+- [Gfycat](https://gfycat.com) — `gfycat` service
+- [Imgur](https://imgur.com) — `imgur` service
+- [Vine](https://vine.co) - `vine` service. The project is in archive state now
+- [Aparat](https://www.aparat.com) - `aparat` service
+- [Yandex.Music](https://music.yandex.ru) - `yandex-music-track` service for tracks, `yandex-music-album` for albums and `yandex-music-playlist` for playlists
+- [Coub](https://coub.com) — `coub` service
+- [CodePen](https://codepen.io) — `codepen` service
+- [Pinterest](https://www.pinterest.com) - `pinterest` service
+- [GitHub Gist](https://gist.github.com) - `github` service
+- [Reddit](https://www.reddit.com/) - `reddit` service
+- [Figma](https://www.figma.com/) - `figma` service
+- [Whimsical](https://whimsical.com/) - whimsical service
+- 👇 Any other [customized service](#add-more-services)
+
+## Installation
 
 Get the package
 
 ```shell
-npm i --save-dev @editorjs/embed
+yarn add @editorjs/embed
 ```
 
 Include module at your application
 
 ```javascript
-const Embed = require('@editorjs/embed');
+import Embed from '@editorjs/embed';
 ```
 
-### Download to your project's source dir
-
-1. Upload folder `dist` from repository
-2. Add `dist/bundle.js` file to your page.
-
-### Load from CDN
-You can load specific version of package from [jsDelivr CDN](https://www.jsdelivr.com/package/npm/@editorjs/embed).
-
-`https://cdn.jsdelivr.net/npm/@editorjs/embed@latest`
-
-Then require this script on page with Editor.js.
-
-```html
-<script src="..."></script>
-```
+Optionally, you can load this tool from CDN [JsDelivr CDN](https://cdn.jsdelivr.net/npm/@editorjs/embed@latest)
 
 ## Usage
 
@@ -56,7 +65,9 @@ var editor = EditorJS({
 
 ## Available configuration
 
-Embed Tool supports some services by default (see the full list [here](docs/services.md)). You can specify services you would like to use:
+### Enabling / disabling services
+
+Embed Tool supports some services by default (see above). You can specify services you would like to use:
 
 ```javascript
 var editor = EditorJS({
@@ -81,10 +92,11 @@ var editor = EditorJS({
 
 > Note that if you pass services you want to use like in the example above, others will not be enabled.
 
-Also you can provide your own services using simple configuration.
+### Add more services
 
+You can provide your own services using simple configuration.
 
-First of all you should create a Service configuration object. It contains following fields:
+First, you should create a Service configuration object. It contains following fields:
 
 | Field      | Type       | Description |
 | ---------- | ---------- | ----------- |
@@ -140,6 +152,7 @@ var editor = EditorJS({
 ```
 
 #### Inline Toolbar
+
 Editor.js provides useful inline toolbar. You can allow it\`s usage in the Embed Tool caption by providing `inlineToolbar: true`.
 
 ```javascript
@@ -169,7 +182,6 @@ var editor = EditorJS({
 | height  | `number` | embedded content height
 | caption | `string` | content caption
 
-
 ```json
 {
   "type" : "embed",
@@ -184,3 +196,12 @@ var editor = EditorJS({
 }
 ```
 
+# About CodeX
+
+<img align="right" width="120" height="120" src="https://codex.so/public/app/img/codex-logo.svg" hspace="50">
+
+CodeX is a team of digital specialists around the world interested in building high-quality open source products on a global market. We are [open](https://codex.so/join) for young people who want to constantly improve their skills and grow professionally with experiments in cutting-edge technologies.
+
+| 🌐 | Join  👋  | Twitter | Instagram |
+| -- | -- | -- | -- |
+| [codex.so](https://codex.so) | [codex.so/join](https://codex.so/join) |[@codex_team](http://twitter.com/codex_team) | [@codex_team](http://instagram.com/codex_team) |

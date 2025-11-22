@@ -1,0 +1,4 @@
+*.html
+dist/
+node_modules/
+

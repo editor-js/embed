@@ -2,6 +2,7 @@
 docs/
 src/
 test/
+vite.config.js
+postcss.config.js
 .babelrc
-webpack.config.js
 yarn.lock

@@ -8,16 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
 
       - name: Cache node modules
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.OS }}-build-${{ env.cache-name }}-
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+            ${{ runner.os }}-node-
 
       - run: yarn install
       - run: yarn build
